@@ -1,17 +1,14 @@
 "use client";
-import { useEffect, useRef } from "react";
-import Image from "next/image";
+
+import { useEffect } from "react";
 import gsap from "gsap";
-import { ScrollTrigger, MotionPathPlugin } from "gsap/all";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 
-gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, MotionPathPlugin);
 
-export default function HowItWorks() {
-  const svgRef = useRef(null);
-  const lineRef = useRef(null);
-  const ballRef = useRef(null);
-  const sectionsRef = useRef([]);
-
+export default function ScrollProcessTimeline() {
   const steps = [
     {
       title: "Create & Upload",
@@ -24,184 +21,141 @@ export default function HowItWorks() {
       image: "/images/review&collobarate.webp",
     },
     {
-      title: "Versions on Demand",
-      subtitle: "Compare iterations like a design time traveler.",
+      title: "Sync & Strategize",
+      subtitle: "Insights + approvals aligned. Ready to ship.",
       image: "/images/sync&strategize.webp",
     },
   ];
 
   useEffect(() => {
-    const line = lineRef.current;
-    const ball = ballRef.current;
-    const sections = sectionsRef.current;
+    gsap.defaults({ ease: "none" });
 
-    const master = gsap.timeline({
+    const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: svgRef.current,
-        start: "top top",
-        end: "bottom bottom",
+        trigger: "#timeline-container",
         scrub: true,
+        start: "top center",
+        end: "bottom bottom",
       },
     });
 
-    master.fromTo(
-      line,
-      { strokeDasharray: 4000, strokeDashoffset: 4000 },
-      { strokeDashoffset: 0, ease: "none" },
-      0
-    );
-
-    master.to(
-      ball,
-      {
-        motionPath: {
-          path: line,
-          align: line,
-          alignOrigin: [0.5, 0.5],
-        },
-        ease: "none",
-      },
-      0
-    );
-
-    gsap.fromTo(
-      ball,
-      { autoAlpha: 0 },
-      {
-        autoAlpha: 1,
-        duration: 1.2,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: svgRef.current,
-          start: "top 90%",
-          end: "top 70%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-
-    sections.forEach((section, i) => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top 85%", 
-          end: "bottom 50%",
-          scrub: true,
-        },
-      });
-
-      tl.to({}, { duration: 0.4 }); 
-
-      tl.to([ball, line], {
-        autoAlpha: 0,
-        duration: 0.6,
-        ease: "power1.out",
-      });
-
-      tl.fromTo(
-        section,
-        { autoAlpha: 0, y: 100 },
+    // Animate the vertical line drawing and the moving ball
+    tl.to(".ball", { duration: 0.01, autoAlpha: 1 })
+      .from(".theLine", { drawSVG: 0 }, 0)
+      .to(
+        ".ball",
         {
-          autoAlpha: 1,
-          y: 0,
-          duration: 1.2,
-          ease: "power2.out",
+          motionPath: {
+            path: ".theLine",
+            align: ".theLine",
+            alignOrigin: [0.5, 0.5],
+          },
         },
-        "<"
+        0
       );
 
-      tl.to([ball, line], {
-        autoAlpha: 1,
+    // Animate each step (fade in & move up)
+    gsap.utils.toArray(".step").forEach((step, i) => {
+      gsap.from(step, {
+        scrollTrigger: {
+          trigger: step,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        y: 60,
+        opacity: 0,
         duration: 0.8,
-        ease: "power1.in",
+        ease: "power3.out",
+      });
+
+      // Glow the dot when ball reaches that section
+      gsap.to(`.dot-${i}`, {
+        scrollTrigger: {
+          trigger: step,
+          start: "top center",
+          toggleActions: "play none none reverse",
+        },
+        scale: 1.5,
+        opacity: 1,
+        duration: 0.3,
+        ease: "power1.out",
       });
     });
+
+    return () => ScrollTrigger.killAll();
   }, []);
 
   return (
-    <section className="relative bg-bg-primary text-white overflow-hidden py-32">
-      {/* === Title === */}
-      <div className="text-center">
+    <section
+      id="how"
+      className="mt-40 bg-bg-primary text-white flex flex-col items-center justify-center pb-40 relative"
+    >
+      <div className="text-center mb-20">
         <h2 className="text-5xl font-semibold">
           How It <span className="text-secondary">Works</span>
         </h2>
       </div>
 
-      {/* === Glowing Vertical Line + Ball === */}
-      <div className="relative flex justify-center">
+      {/* Timeline container */}
+      <div
+        id="timeline-container"
+        className="relative flex flex-col items-center w-full max-w-[800px]"
+      >
+        {/* Vertical SVG line & ball */}
         <svg
-          ref={svgRef}
-          viewBox="0 0 200 4000"
-          className="absolute left-1/2 -translate-x-1/2 w-[150px] h-[3500px] overflow-visible"
+          id="timeline-svg"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 200 1100"
+          className="absolute left-1/2 -translate-x-1/2 h-full w-[200px] overflow-visible"
         >
-          {/* Soft Background Glow Line */}
           <path
-            d="M 100 0 L 100 4000"
-            stroke="#0AB5A9"
-            strokeWidth="12"
-            strokeLinecap="round"
-            opacity="0.15"
-          />
-
-          {/* Main Animated Line */}
-          <path
-            ref={lineRef}
-            d="M 100 0 L 100 4000"
+            className="theLine"
+            d="M 100 50 L 100 1050"
             fill="none"
-            stroke="#0AB5A9"
-            strokeWidth="5"
-            strokeLinecap="round"
-            style={{ filter: "drop-shadow(0 0 15px #0AB5A9)" }}
+            strokeWidth="4px"
           />
-
-          {/* Glowing Ball */}
-          <g ref={ballRef} className="relative z-[10] opacity-0">
-            <circle
-              r="25"
-              cx="100"
-              cy="0"
-              fill="#0AB5A9"
-              opacity="0.3"
-              className="blur-xl"
-            />
-            <circle
-              r="12"
-              cx="100"
-              cy="0"
-              fill="#071a20"
-              stroke="#0AB5A9"
-              strokeWidth="4"
-              className="drop-shadow-[0_0_25px_#0AB5A9]"
-            />
-          </g>
+          <circle className="ball" r="10" cx="100" cy="50" />
         </svg>
-      </div>
 
-      {/* === Steps === */}
-      <div className="relative z-20 mt-[300px] flex flex-col items-center space-y-[100vh]">
-        {steps.map((step, i) => (
-          <div
-            key={i}
-            ref={(el) => (sectionsRef.current[i] = el)}
-            className="max-w-6xl mx-auto text-center px-4 opacity-0"
-          >
-            <h3 className="text-3xl md:text-4xl font-semibold mb-3">
-              {step.title}
-            </h3>
-            <p className="text-gray-400 mb-10">{step.subtitle}</p>
-            <div className="rounded-2xl overflow-hidden border border-[#16323C]">
-              <Image
+        {/* Steps + static glowing dots */}
+        <div className="flex flex-col items-center gap-[300px] z-10">
+          {steps.map((step, i) => (
+            <div
+              key={i}
+              className="step flex flex-col items-center text-center space-y-4 relative"
+            >
+              {/* Static Dot aligned with the line */}
+              <div
+                className={`absolute -top-12 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-primary/40 blur-sm dot-${i}`}
+              ></div>
+
+              <h2 className="text-3xl font-semibold">{step.title}</h2>
+              <p className="text-sm text-gray-300">{step.subtitle}</p>
+              <img
                 src={step.image}
                 alt={step.title}
-                width={1200}
-                height={600}
-                className="w-full h-auto object-cover"
-                priority
+                className="w-full rounded-xl mt-4 border border-primary/30 shadow-lg"
               />
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
+
+      <style jsx>{`
+        .theLine {
+          stroke: #0ab5a9;
+          filter: drop-shadow(0 0 10px #0ab5a9);
+        }
+        .ball {
+          fill: #0ab5a9;
+          visibility: hidden;
+          filter: drop-shadow(0 0 10px #0ab5a9);
+        }
+        [class*="dot-"] {
+          transition: all 0.3s ease;
+          opacity: 0.6;
+        }
+      `}</style>
     </section>
   );
 }

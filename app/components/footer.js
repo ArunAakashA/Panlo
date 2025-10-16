@@ -29,7 +29,7 @@ export default function Footer() {
               Features
             </a>
             <a
-              href="#how-it-works"
+              href="#how"
               className="hover:text-white transition-colors duration-200"
             >
               How it Works

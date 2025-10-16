@@ -1,65 +1,78 @@
 "use client";
 
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
 
 const logos = [
-  "logos/beardo.svg",
-  "logos/beardo.svg",
-  "logos/beardo.svg",
-  "logos/beardo.svg",
-  "logos/beardo.svg",
-  "logos/beardo.svg",
-  "logos/beardo.svg",
-  "logos/beardo.svg",
-  "logos/beardo.svg",
+  "/logos/admiral.png",
+  "/logos/beardo.png",
+  "/logos/brigade.png",
+  "/logos/kula.png",
+  "/logos/playo.png",
+  "/logos/rapido.png",
+  "/logos/reliance.png",
+  "/logos/sg.png",
+  "/logos/vistrain.png",
 ];
 
-export default function LogoCarousel() {
+export default function LogoMarquee() {
   return (
-    <section className="relative py-6 bg-bg-primary">
+    <section className="relative py-8 bg-bg-primary overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative">
         {/* Left Fade */}
-        <div className="absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-[#071A20] to-transparent z-10 pointer-events-none"></div>
-
+        <div className="absolute left-0 top-0 h-full w-24 sm:w-32 md:w-40 bg-gradient-to-r from-bg-primary via-bg-primary/90 to-transparent pointer-events-none z-20" />
         {/* Right Fade */}
-        <div className="absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-[#071A20] to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute right-0 top-0 h-full w-24 sm:w-32 md:w-40 bg-gradient-to-l from-bg-primary via-bg-primary/90 to-transparent pointer-events-none z-20" />
 
-        <Swiper
-          modules={[Autoplay]}
-          loop={true}
-          slidesPerView={7}
-          spaceBetween={40}
-          speed={6000} 
-          autoplay={{
-            delay: 0,
-            disableOnInteraction: false,
-          }}
-          allowTouchMove={false} 
-          breakpoints={{
-            320: { slidesPerView: 2, spaceBetween: 20 },
-            480: { slidesPerView: 3, spaceBetween: 30 },
-            768: { slidesPerView: 5, spaceBetween: 40 },
-            1024: { slidesPerView: 7, spaceBetween: 50 },
-          }}
-          className="!overflow-hidden flex items-center"
-        >
-          {logos.concat(logos).map((logo, index) => (
-            <SwiperSlide key={index}>
-              <Image
-                src={logo}
-                alt={`Logo ${index + 1}`}
-                width={120}
-                height={60}
-                className="h-10 w-auto opacity-70 hover:opacity-100 transition-all duration-300 mx-auto select-none"
-                priority
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        {/* Scrolling logos */}
+        <div className="overflow-hidden">
+          <div className="marquee flex items-center gap-10 whitespace-nowrap will-change-transform">
+            {logos.concat(logos).map((src, i) => (
+              <div key={i} className="flex-shrink-0">
+                <Image
+                  src={src}
+                  alt={`logo-${i}`}
+                  width={140}
+                  height={60}
+                  className="h-10 w-auto opacity-80 hover:opacity-100 transition-opacity duration-300 select-none"
+                  priority
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
+
+      <style jsx>{`
+        /* Keyframes for smooth continuous scroll */
+        @keyframes marquee {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        /* Default speed (desktop) */
+        .marquee {
+          animation: marquee 25s linear infinite;
+        }
+
+        /* Faster on iPad and tablets */
+        @media (max-width: 1024px) {
+          .marquee {
+            animation-duration: 18s;
+          }
+        }
+
+        /* Even faster on mobile */
+        @media (max-width: 768px) {
+          .marquee {
+            animation-duration: 12s;
+          }
+        }
+
+      `}</style>
     </section>
   );
 }

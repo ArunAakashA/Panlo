@@ -8,6 +8,7 @@ import SectionReview from './components/section_review';
 import SectionHowItWorks from './components/section_how_it_works';
 import SectionTestimonials from './components/section_testimonials';
 import SectionCTA from './components/section_CTA';
+import SectionWorks from './components/section_works';
 
 export default function Page() {
   return (
@@ -18,8 +19,9 @@ export default function Page() {
       <SectionFeatures />
       <SectionInsights />
       <SectionReview />
-      {/* <SectionHowItWorks /> */}
+      <SectionHowItWorks />
       <SectionTestimonials />
+      {/* <SectionWorks /> */}
       <SectionCTA />
     </main>
   )
