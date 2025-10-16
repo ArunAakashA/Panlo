@@ -4,6 +4,10 @@ import LogoCarousel from "./components/logo_carousel";
 import SectionVideo from './components/section_video';
 import SectionFeatures from './components/section_features';
 import SectionInsights from './components/section_insights';
+import SectionReview from './components/section_review';
+import SectionHowItWorks from './components/section_how_it_works';
+import SectionTestimonials from './components/section_testimonials';
+import SectionCTA from './components/section_CTA';
 
 export default function Page() {
   return (
@@ -13,7 +17,10 @@ export default function Page() {
       <SectionVideo />
       <SectionFeatures />
       <SectionInsights />
-      {/* later: add Features, Testimonials sections below */}
+      <SectionReview />
+      {/* <SectionHowItWorks /> */}
+      <SectionTestimonials />
+      <SectionCTA />
     </main>
   )
 }

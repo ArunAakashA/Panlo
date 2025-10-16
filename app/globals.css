@@ -1,20 +1,36 @@
 @import "tailwindcss";
 
 :root {
-  --background: #071a20; /* dark background */
-  --foreground: #171717;
+  --color-primary: #0AB5A9;
+  --color-secondary: #77F1FF;
+  --color-white: #FFFFFF;
+  --color-blakc: #000000;
+
+  --color-bg-primary: #030F18;
+  --color-bg-secondary: #0C151B;
+  --color-bg-tertiary : #0E1E24;
+
+  --gradient-1: linear-gradient(270deg, #0AB5A9 0%, #77F1FF 100%);
+
+  --font-jakarta: var(--font-jakarta, "Plus Jakarta Sans"), sans-serif;
 }
 
-/* 🎨 Tailwind theme variables */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-jakarta); /* changed from geist to jakarta */
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-white: var(--color-white);
+  --color-black: var(--color-black);
+  --color-bg-primary: var(--color-bg-primary);
+  --color-bg-secondary: var(--color-bg-secondary);
+  --color-bg-tertiary : var(--color-bg-tertiary);
+
+  --font-sans: var(--font-jakarta);
+
+  --gradient-1: var(--gradient-1);
 }
 
-/* 🩶 Global styles */
 body {
-  background: var(--background);
-  color: var(--color-foreground);
-  font-family: var(--font-jakarta), sans-serif; /* ensure fallback */
+  background-color: var(--color-bg-primary);
+  color: var(--color-tertiary);
+  font-family: var(--font-jakarta);
 }

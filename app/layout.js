@@ -1,10 +1,11 @@
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import Header from "@/app/components/header"; // ✅ add this line
+import Header from "@/app/components/header"; 
+import Footer from "./components/footer";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"], // add the weights you use in Figma
+  weight: ["400", "500", "600", "700"], 
   variable: "--font-jakarta",
   display: "swap",
 });
@@ -13,7 +14,7 @@ export const metadata = {
   title: "Panlo",
   description: "Your Marketing Workflow Simplified",
   icons: {
-    icon: "/decor-star.svg",        // ✅ default favicon
+    icon: "/decor-star.svg",      
   },
 };
 
@@ -21,8 +22,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${jakarta.variable} font-jakarta antialiased`}>
-        <Header /> {/* ✅ render header above all pages */}
+        <Header /> 
         {children}
+        <Footer />
       </body>
     </html>
   );

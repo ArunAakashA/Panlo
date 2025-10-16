@@ -1,14 +1,17 @@
+"use client";
+import Image from "next/image";
+
 export default function SectionFeatures() {
   return (
-    <section className="bg-[#071a20] text-white py-20 px-4">
+    <section id="features" className="bg-bg-primary text-white py-20 px-4">
       <div className="max-w-7xl mx-auto space-y-10">
 
         {/* === ROW 1 === */}
-        <div className="bg-[#0E1E24] border border-[#16323C] rounded-2xl p-10 pr-10 md:pr-0 grid md:grid-cols-[1fr_2.5fr] gap-10 items-center">
+        <div className="bg-bg-tertiary rounded-2xl p-8 pr-0 lg:p-10 lg:pr-0 grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-8 lg:gap-10 items-center">
           {/* Left content */}
-          <div className="space-y-5">
-            <h2 className="text-5xl font-semibold leading-tight">
-              Less mess. <span className="text-[#0AB5A9]">More magic</span>
+          <div className="space-y-5 text-center lg:text-left pr-8 lg:pr-0">
+            <h2 className="text-4xl lg:text-5xl font-semibold leading-tight">
+              Less mess. <span className="text-secondary">More magic</span>
             </h2>
             <p className="text-gray-400 leading-relaxed">
               Creative chaos is real. Feedback scattered across emails, chats, screenshots
@@ -22,44 +25,51 @@ export default function SectionFeatures() {
           </div>
 
           {/* Right Image */}
-          <div>
-            <img
+          <div className="relative w-full h-auto">
+            <Image
               src="/images/less-mess-more-magic.webp"
               alt="Analytics chart"
-              className="w-full object-cover"
+              width={1000}
+              height={600}
+              className="w-full object-cover rounded-xl"
+              priority
             />
           </div>
         </div>
 
         {/* === ROW 2 === */}
-        <div className="grid md:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
           {/* LEFT SIDE CONTAINER */}
-          <div className="bg-[#0E1E24] rounded-2xl border border-[#16323C] pt-10 pl-10 space-y-6">
+          <div className="bg-bg-tertiary rounded-2xl pt-8 pl-8 space-y-6">
             {/* Top Content */}
-            <div className="pb-2">
-              <h3 className="text-xl font-semibold text-[#0AB5A9]">
-                Project Management, Minus<br />  the Mayhem
+            <div className="pb-2 text-center lg:text-left pr-8">
+              <h3 className="text-xl font-semibold text-secondary">
+                Project Management, Minus<br className="hidden lg:block" /> the Mayhem
               </h3>
               <p className="text-gray-400 mt-2">
-                Multiple accounts & role permissions made <br/>simple.
+                Multiple accounts & role permissions made simple.
               </p>
             </div>
 
             {/* Bottom Image */}
-            <img
-              src="/images/project-management.webp"
-              alt="Project management"
-              className="w-full h-75 object-cover"
-            />
+            <div className="relative w-full h-auto lg:mt-20">
+              <Image
+                src="/images/project-management.webp"
+                alt="Project management"
+                width={1000}
+                height={600}
+                className="w-full object-cover rounded-b-2xl"
+              />
+            </div>
           </div>
 
           {/* RIGHT SIDE CONTAINER */}
           <div className="space-y-10">
             {/* Top Container */}
-            <div className="bg-[#0E1E24] rounded-2xl border border-[#16323C] pl-10 grid md:grid-cols-[1fr_2fr] gap-6 items-center">
+            <div className="bg-bg-tertiary rounded-2xl pl-8 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-6 items-center text-center lg:text-left">
               {/* Left Content */}
-              <div>
-                <h3 className="text-xl font-semibold text-[#0AB5A9]">
+              <div className="pr-8 pt-8 lg:pt-0">
+                <h3 className="text-xl font-semibold text-secondary">
                   Admin Powers, Simplified
                 </h3>
                 <p className="text-gray-400 mt-2">
@@ -67,20 +77,22 @@ export default function SectionFeatures() {
                 </p>
               </div>
               {/* Right Image */}
-              <div>
-                <img
-                src="/images/admin-powers.webp"
-                alt="Admin controls"
-                className="w-full h-50 object-cover"
-              />
+              <div className="relative w-full h-auto">
+                <Image
+                  src="/images/admin-powers.webp"
+                  alt="Admin controls"
+                  width={1000}
+                  height={600}
+                  className="w-full object-cover rounded-r-2xl"
+                />
               </div>
             </div>
 
             {/* Bottom Container */}
-            <div className="bg-[#0E1E24] rounded-2xl border border-[#16323C] pl-10 pr-0 pb-0 grid md:grid-cols-[1fr_2fr] gap-6 items-center">
+            <div className="bg-bg-tertiary rounded-2xl pl-8 pr-0 pb-0 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-6 items-center text-center lg:text-left">
               {/* Left Content */}
-              <div className="mb-0">
-                <h3 className="text-xl font-semibold text-[#0AB5A9]">
+              <div className="pr-8 pt-8 lg:pt-0">
+                <h3 className="text-xl font-semibold text-secondary">
                   Template Treasure Trove
                 </h3>
                 <p className="text-gray-400 mt-2">
@@ -88,11 +100,13 @@ export default function SectionFeatures() {
                 </p>
               </div>
               {/* Right Image */}
-              <div>
-                <img
-                    src="/images/template-treasure-trove.webp"
-                    alt="Templates gallery"
-                    className="w-full h-60 object-cover"
+              <div className="relative w-full h-auto">
+                <Image
+                  src="/images/template-treasure-trove.webp"
+                  alt="Templates gallery"
+                  width={1000}
+                  height={600}
+                  className="w-full object-cover rounded-r-2xl"
                 />
               </div>
             </div>

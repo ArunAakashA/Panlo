@@ -1,37 +1,52 @@
-// components/Hero.js
+"use client";
+import Link from "next/link";
+import Image from "next/image";
+
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      <div className="container mx-auto px-6 pt-24 pb-16 text-center">
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight text-teal-300">
+    <section className="relative overflow-hidden text-center">
+      
+
+      <div className="relative z-10 container mx-auto px-6 pt-28 pb-24">
+        {/* Hero Title */}
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight bg-gradient-to-r from-[#0AB5A9] to-[#77F1FF] bg-clip-text text-transparent">
           Your Marketing Workflow
           <br />
           Simplified
         </h1>
 
-        <p className="mt-6 max-w-2xl mx-auto text-slate-300">
-          From PDFs to video to live websites, Panlo lets you manage, review and sync everything in one place along with AI powered Dashboard.
+        {/* Subtitle */}
+        <p className="mt-6 mx-auto text-slate-300 text-lg md:text-xl leading-relaxed px-4 md:px-10 lg:px-60">
+          From PDFs to video to live websites, Panlo lets you manage, review, and sync
+          everything in one place - powered by AI-driven insights and collaboration tools.
         </p>
         
-        <div className="mt-10 flex justify-center gap-4">
-          <a
+        {/* CTA Buttons */}
+        <div className="mt-10 flex flex-wrap justify-center gap-4">
+          <Link
             href="#book"
-            className="px-6 py-3 rounded-full font-semibold bg-gradient-to-r from-cyan-400 to-teal-400 text-slate-900 shadow-lg"
+            className="px-8 py-3 rounded-full font-semibold text-black bg-gradient-to-r from-secondary to-primary shadow-lg hover:opacity-90 transition"
           >
             Book a Demo
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="#watch"
-            className="px-6 py-3 rounded-full border border-slate-600 text-slate-200"
+            className="px-8 py-3 rounded-full border border-secondary text-secondary hover:bg-secondary/10 transition"
           >
             Watch the Video
-          </a>
+          </Link>
         </div>
       </div>
 
-      {/* Decorative star or SVG (optional). Place absolute elements here if you exported them from Figma. */}
-      <img src="/decor-star.svg" alt="" className="pointer-events-none absolute left-4 top-1/3 w-6 opacity-80" />
+      {/* Decorative star */}
+      <Image
+        src="/decor-star.svg"
+        alt="Decorative star"
+        width={24}
+        height={24}
+        className="pointer-events-none absolute left-6 top-1/3 opacity-80"
+      />
     </section>
-  )
+  );
 }
