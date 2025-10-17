@@ -6,9 +6,11 @@ import SectionFeatures from './components/section_features';
 import SectionInsights from './components/section_insights';
 import SectionReview from './components/section_review';
 import SectionHowItWorks from './components/section_how_it_works';
+import ScrollGlowLineWithSection_1 from './components/section_how_it_works_1';
+import ScrollGlowLineWithSection_2 from './components/section_how_it_works_2';
+import ScrollGlowLineWithSection_3 from './components/section_how_it_works_3';
 import SectionTestimonials from './components/section_testimonials';
 import SectionCTA from './components/section_CTA';
-import SectionWorks from './components/section_works';
 
 export default function Page() {
   return (
@@ -20,8 +22,10 @@ export default function Page() {
       <SectionInsights />
       <SectionReview />
       <SectionHowItWorks />
+      {/* <ScrollGlowLineWithSection_1 />
+      <ScrollGlowLineWithSection_2 /> */}
+      {/* <ScrollGlowLineWithSection_3 /> */}
       <SectionTestimonials />
-      {/* <SectionWorks /> */}
       <SectionCTA />
     </main>
   )
