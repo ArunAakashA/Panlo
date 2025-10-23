@@ -1,5 +1,7 @@
 "use client";
 
+import DecorStar from "./decor_star";
+
 export default function SectionVideo() {
   return (
     <section className="bg-bg-primary text-white pt-30 px-4 lg:px-0">
@@ -21,6 +23,10 @@ export default function SectionVideo() {
           </div>
         </div>
       </div>
+
+      {/* Stars */}
+      <DecorStar position="top-350 right-10" size={40} delay={0.8} glow={false} float={false}/>
+      <DecorStar position="top-400 left-80" size={40} delay={1.4}  glow={false} float={false}/>
     </section>
   );
 }

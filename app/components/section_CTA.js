@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 
 export default function SectionCTA() {
@@ -10,12 +11,35 @@ export default function SectionCTA() {
           
           {/* === LEFT SIDE CONTENT === */}
           <div className="space-y-6 pt-8 md:pb-10">
-            <h2 className="text-4xl md:text-5xl font-semibold leading-tight text-[#071a20]">
+            <h2 className="text-4xl md:text-5xl font-semibold leading-tight text-black">
               Where creativity<br />meets clarity.
             </h2>
-            <button className="mt-4 border border-[#071a20] text-[#071a20] font-medium px-6 py-3 rounded-full hover:bg-[#071a20] hover:text-white transition-all duration-300">
-              Book a Demo
-            </button>
+
+            <Link
+              href="#book" // you can change this target as needed
+              className="group relative inline-flex items-center justify-center px-6 py-3 rounded-full border border-[#071a20] text-[#071a20] font-medium overflow-hidden transition-all duration-300"
+            >
+              <span className="flex items-center justify-center gap-2">
+                {/* Text */}
+                <span className="transition-transform duration-300 translate-x-4 group-hover:-translate-x-0">
+                  Book a Demo
+                </span>
+
+                {/* Arrow – slides in from right */}
+                <span className="inline-block overflow-hidden w-5">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="w-5 h-5 -translate-x-5 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </span>
+            </Link>
           </div>
 
           {/* === RIGHT SIDE IMAGE === */}

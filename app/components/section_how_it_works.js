@@ -8,7 +8,7 @@ export default function SectionHowItWorks() {
   return (
     <section id="how" className="overflow-hidden">
       {/* Main Heading */}
-      <div className="pt-40 pb-20 text-center z-10">
+      <div className="pt-30 text-center z-10">
         <h1 className="text-6xl font-bold text-white">
           How It
           <span className="text-[#0AB5A9] ml-3">Works</span>
@@ -16,9 +16,10 @@ export default function SectionHowItWorks() {
       </div>
 
       {/* All 3 GSAP Sections */}
-      <SectionHowItWorks_1 />
+      {/* <SectionHowItWorks_1 />
       <SectionHowItWorks_2 />
-      <SectionHowItWorks_3 />
+      <SectionHowItWorks_3 /> */}
+      
     </section>
   );
 }

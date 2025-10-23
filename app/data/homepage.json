@@ -1,0 +1,7 @@
+{
+  "tabs": [
+    { "title": "Create & Upload", "componentType": "create-upload" },
+    { "title": "Review & Collaborate", "componentType": "review-collaborate" },
+    { "title": "Sync & Strategize", "componentType": "sync-strategize" }
+  ]
+}

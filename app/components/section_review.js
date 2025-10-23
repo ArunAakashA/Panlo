@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function SectionReview() {
   return (
-    <section className="bg-bg-primary text-white py-20 mb-0 px-4">
+    <section className="bg-bg-tertiary text-white py-20 mb-0 px-4">
       <div className="max-w-7xl mx-auto space-y-16">
         {/* === HEADING === */}
         <h2 className="text-5xl font-semibold leading-tight text-center">

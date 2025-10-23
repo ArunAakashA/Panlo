@@ -1,0 +1,13 @@
+.jumplist-header {
+  backdrop-filter: blur(6px);
+  background-color: rgba(6,16,22,0.95);
+  transition: all .3s ease;
+  z-index: 40;
+}
+#jumplist-pin-spacer {
+  position: sticky;
+  top: 0;
+}
+@media (max-width: 767px) {
+  #jumplist-pin-spacer { display: none; }
+}

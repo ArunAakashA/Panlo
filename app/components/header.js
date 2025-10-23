@@ -8,30 +8,6 @@ export default function Header() {
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
 
-  // ✅ Close menu when clicking outside OR pressing Escape
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (
-        menuRef.current &&
-        !menuRef.current.contains(e.target) &&
-        !buttonRef.current.contains(e.target)
-      ) {
-        setIsOpen(false);
-      }
-    }
-    function handleEscape(e) {
-      if (e.key === "Escape") setIsOpen(false);
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("keydown", handleEscape);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleEscape);
-    };
-  }, []);
-
   return (
     <header className="fixed w-full top-0 z-50 md:bg-[#030F18]/80 md:backdrop-blur-md md:border-b border-[#16323C]">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
