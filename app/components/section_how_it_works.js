@@ -11,7 +11,7 @@ export default function SectionHowItWorks() {
       <div className="pt-30 text-center z-10">
         <h1 className="text-6xl font-bold text-white">
           How It
-          <span className="text-[#0AB5A9] ml-3">Works</span>
+          <span className="text-secondary ml-3">Works</span>
         </h1>
       </div>
 

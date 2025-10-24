@@ -5,9 +5,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./jumplist.css";
 
-import CreateAndUpload from "../ComponentCustomJSON/CreateAndUpload";
-import ReviewAndCollaborate from "../ComponentCustomJSON/ReviewAndCollaborate";
-import SyncAndStrategize from "../ComponentCustomJSON/SyncAndStrategize";
 import SectionHowItWorks_1 from "../ComponentCustomJSON/section_how_it_works_1";
 import SectionHowItWorks_2 from "../ComponentCustomJSON/section_how_it_works_2";
 import SectionHowItWorks_3 from "../ComponentCustomJSON/section_how_it_works_3";
@@ -34,7 +31,7 @@ export default function Jumplist({ json }) {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top top",
+          start: "top+=60px 90%",
           end: "bottom bottom",
           scrub: true,
           onEnter: () => gsap.to(headingRef.current, { autoAlpha: 1, y: 0, duration: 0.4 }),
@@ -80,7 +77,7 @@ export default function Jumplist({ json }) {
         id="jumplist-pin-spacer"
         className="z-20 hidden md:block w-screen !left-0 bg-bg-primary border-b border-primary/30 overflow-x-hidden sticky top-0 opacity-0 -translate-y-10 pointer-events-none"
       >
-        <div className="flex justify-center gap-60 pt-6 pb-4 relative">
+        <div className="flex justify-center gap-60 pt-7 pb-4 relative">
           {json.tabs.map((tab, index) => (
             <button
               key={index}
