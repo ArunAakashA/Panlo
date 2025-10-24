@@ -16,9 +16,9 @@ export default function Header() {
           <Image
             src="/logo.svg"
             alt="Panlo Logo"
-            width={100}
-            height={32}
-            className="h-7 md:h-8 w-auto"
+            width={120}
+            height={40}
+            className="h-10 md:h-12 w-auto"
             priority
           />
         </Link>
@@ -40,7 +40,7 @@ export default function Header() {
         <div className="hidden md:flex items-center gap-4">
           <Link
             href="#book"
-            className="inline-block px-5 py-2 rounded-full text-base font-semibold text-black bg-gradient-to-r from-secondary to-primary shadow-md hover:opacity-90 transition"
+            className="inline-block px-5 py-2.5 rounded-full text-base font-semibold text-black bg-gradient-to-r from-secondary to-primary shadow-md hover:opacity-90 transition"
           >
             Book a Demo
           </Link>

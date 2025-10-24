@@ -63,7 +63,6 @@ export default function SectionHowItWorks_1() {
   }, []);
 
 
-
   return (
     <section
       ref={sectionRef}
@@ -93,8 +92,8 @@ export default function SectionHowItWorks_1() {
 
       {/* Content (untouched, no animation) */}
       <div className="content-section relative z-10 mt-[300px] flex flex-col items-center text-center space-y-4 w-full max-w-[900px] px-6">
-        <h2 className="text-4xl font-bold text-white">Create & Upload</h2>
-        <p className="text-gray-300 text-lg">Add assets or link a live site.</p>
+        <h2 className="text-[40px] font-bold text-white">Create & Upload</h2>
+        <p className="text-gray-300 text-base font-medium">Add assets or link a live site.</p>
 
         <div className="w-full mt-6 rounded-xl shadow-lg overflow-hidden">
           <Image
@@ -127,6 +126,7 @@ export default function SectionHowItWorks_1() {
         .glowline-svg {
           transform: translateZ(0);
         }
+
       `}</style>
 
       {/* Decorative stars */}

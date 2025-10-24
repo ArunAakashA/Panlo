@@ -86,8 +86,8 @@ export default function SectionHowItWorks_3() {
 
       {/* Section Content */}
       <div className="relative z-10 mt-[300px] flex flex-col items-center text-center space-y-4 w-full max-w-[900px] px-6">
-        <h2 className="text-4xl font-bold text-white">Sync & Strategize</h2>
-        <p className="text-gray-300 text-lg">
+        <h2 className="text-[40px] font-bold text-white">Sync & Strategize</h2>
+        <p className="text-gray-300 text-base font-medium">
           Insights + approvals aligned. Ready to ship.
         </p>
 

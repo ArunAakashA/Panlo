@@ -11,7 +11,7 @@ export default function SectionCTA() {
           
           {/* === LEFT SIDE CONTENT === */}
           <div className="space-y-6 pt-8 md:pb-10">
-            <h2 className="text-4xl md:text-[56px] font-bold leading-tight text-black">
+            <h2 className="text-4xl md:text-[50px] font-bold leading-tight text-black">
               Where creativity<br />meets clarity.
             </h2>
 

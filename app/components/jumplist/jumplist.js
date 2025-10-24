@@ -31,7 +31,7 @@ export default function Jumplist({ json }) {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top+=60px 90%",
+          start: "top+=60px top",
           end: "bottom bottom",
           scrub: true,
           onEnter: () => gsap.to(headingRef.current, { autoAlpha: 1, y: 0, duration: 0.4 }),
