@@ -4,15 +4,29 @@
   --color-primary: #0AB5A9;
   --color-secondary: #77F1FF;
   --color-white: #FFFFFF;
-  --color-black: #000000;
+  --color-black: #182528;
 
   --color-bg-primary: #030F18;
   --color-bg-secondary: #0C151B;
   --color-bg-tertiary : #0E1E24;
+  --color-bg-fourth : #14242F;
 
   --gradient-1: linear-gradient(270deg, #0AB5A9 0%, #77F1FF 100%);
 
   --font-jakarta: var(--font-jakarta, "Plus Jakarta Sans"), sans-serif;
+
+  /* --text-xs: 16px;   
+  --text-sm: 18px;   
+  --text-md: 24px;  
+  --text-lg: 32px;  
+  --text-xl: 40px;   
+  --text-2xl: 56px;  
+  --text-3xl: 80px;  
+  
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700; */
 }
 
 @theme inline {
@@ -23,10 +37,24 @@
   --color-bg-primary: var(--color-bg-primary);
   --color-bg-secondary: var(--color-bg-secondary);
   --color-bg-tertiary : var(--color-bg-tertiary);
+  --color-bg-fourth : var(--color-bg-fourth);
 
   --font-sans: var(--font-jakarta);
 
   --gradient-1: var(--gradient-1);
+
+  /* --text-xs: var(--text-xs);
+  --text-sm: var(--text-sm);
+  --text-md: var(--text-md);
+  --text-lg: var(--text-lg);
+  --text-xl: var(--text-xl);
+  --text-2xl: var(--text-2xl);
+  --text-3xl: var(--text-3xl); */
+
+  /* --font-weight-regular: var(--font-weight-regular);
+  --font-weight-medium: var(--font-weight-medium);
+  --font-weight-semibold: var(--font-weight-semibold);
+  --font-weight-bold: var(--font-weight-bold); */
 }
 
 body {

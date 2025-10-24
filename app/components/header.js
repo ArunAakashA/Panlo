@@ -9,7 +9,7 @@ export default function Header() {
   const buttonRef = useRef(null);
 
   return (
-    <header className="fixed w-full top-0 z-50 md:bg-[#030F18]/80 md:backdrop-blur-md md:border-b border-[#16323C]">
+    <header className="fixed w-full top-0 z-50 md:bg-bg-primary/80 md:backdrop-blur-md md:border-b border-white/10">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* === Logo === */}
         <Link href="/" className="flex items-center">
@@ -25,13 +25,13 @@ export default function Header() {
 
         {/* === Desktop Navigation === */}
         <nav className="hidden md:flex items-center gap-10 text-slate-300 md:pl-40">
-          <Link href="#features" className="text-sm hover:text-white transition">
+          <Link href="#features" className="text-lg hover:text-white transition">
             Features
           </Link>
-          <Link href="#how" className="text-sm hover:text-white transition">
+          <Link href="#how" className="text-lg hover:text-white transition">
             How it Works
           </Link>
-          <Link href="#testimonials" className="text-sm hover:text-white transition">
+          <Link href="#testimonials" className="text-lg hover:text-white transition">
             Testimonials
           </Link>
         </nav>
@@ -40,13 +40,13 @@ export default function Header() {
         <div className="hidden md:flex items-center gap-4">
           <Link
             href="#book"
-            className="inline-block px-5 py-2 rounded-full font-medium text-black bg-gradient-to-r from-secondary to-primary shadow-md hover:opacity-90 transition"
+            className="inline-block px-5 py-2 rounded-full text-base font-semibold text-black bg-gradient-to-r from-secondary to-primary shadow-md hover:opacity-90 transition"
           >
             Book a Demo
           </Link>
           <Link
             href="#login"
-            className="inline-block px-5 py-2 rounded-full font-medium border border-secondary text-secondary hover:bg-primary/10 transition"
+            className="inline-block px-5 py-2 rounded-full text-base font-semibold border border-secondary text-secondary hover:bg-primary/10 transition"
           >
             Login
           </Link>
@@ -88,7 +88,7 @@ export default function Header() {
       {/* === Mobile Menu === */}
       <div
         ref={menuRef}
-        className={`md:hidden bg-[#030F18] border-t border-[#16323C] transition-all duration-300 ease-in-out ${
+        className={`md:hidden bg-bg-primary border-t border-white/10 transition-all duration-300 ease-in-out ${
           isOpen
             ? "opacity-100 translate-y-0 visible"
             : "opacity-0 -translate-y-2 invisible"
@@ -119,14 +119,14 @@ export default function Header() {
           <Link
             href="#book"
             onClick={() => setIsOpen(false)}
-            className="mt-3 inline-block px-5 py-2 rounded-full font-medium text-[#030F18] bg-gradient-to-r from-[#0AB5A9] to-[#77F1FF] text-center"
+            className="mt-3 inline-block text-xs weight-semibold px-5 py-2 rounded-full text-black bg-gradient-to-r from-primary to-secondary text-center"
           >
             Book a Demo
           </Link>
           <Link
             href="#login"
             onClick={() => setIsOpen(false)}
-            className="inline-block px-5 py-2 rounded-full font-medium border border-[#0AB5A9] text-[#77F1FF] text-center"
+            className="inline-block px-5 py-2 text-xs weight-semibold rounded-full font-medium border border-secondary text-secondary text-center"
           >
             Login
           </Link>

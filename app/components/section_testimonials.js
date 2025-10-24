@@ -71,7 +71,7 @@ export default function SectionTestimonials() {
     >
       <div className="max-w-7xl mx-auto text-center space-y-12 relative">
         {/* === HEADING === */}
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight">
+        <h2 className="text-3xl sm:text-4xl md:text-[56px] font-bold leading-tight">
           Trusted by teams who value <br className="hidden sm:block" />
           <span className="text-secondary">clarity with creativity</span>
         </h2>
@@ -101,7 +101,7 @@ export default function SectionTestimonials() {
             1024: { slidesPerView: 2.5 },
             1440: { slidesPerView: 3 },
           }}
-          className="!pb-8"
+          className="!pb-0"
         >
           {testimonials.map((t) => (
             <SwiperSlide key={t.id}>
@@ -136,22 +136,63 @@ export default function SectionTestimonials() {
 
       {/* === DOT STYLE === */}
       <style jsx global>{`
+        /* === Pagination Container === */
+        .custom-pagination {
+          position: relative;
+          width: 9%;
+          height: 25px;
+          margin: 0 auto;
+          display: flex !important;
+          justify-content: center;
+          align-items: center;
+          border-radius: 9999px;
+          background: rgba(255, 255, 255, 0.05);
+          box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.03);
+          overflow: hidden;
+        }
+
+        /* === Fading Edges (left & right glow) === */
+        .custom-pagination::before,
+        .custom-pagination::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          width: 80px;
+          height: 100%;
+          pointer-events: none;
+        }
+
+        /* === Dots === */
         .custom-pagination .swiper-pagination-bullet {
           width: 8px;
           height: 8px;
-          background: #ffffff20;
+          background: rgba(255, 255, 255, 0.15);
           opacity: 1;
-          transition: all 0.4s ease;
           border-radius: 50%;
+          transition: all 0.4s ease;
         }
+
+        /* === Active Dot === */
         .custom-pagination .swiper-pagination-bullet-active {
           background: #0ab5a9;
-          box-shadow: 0 0 10px #0ab5a9;
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
+          box-shadow: 0 0 10px #0ab5a9, 0 0 25px #0ab5a980;
+          transform: scale(1.1);
+        }
+
+        @media only screen and (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
+          .custom-pagination {
+            width: 15%;
+            height: 24px;
+          }
+        }
+
+        @media (max-width: 768px){
+          .custom-pagination {
+            width: 35%;
+          }
         }
       `}</style>
+
     </section>
   );
 }

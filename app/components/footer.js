@@ -21,7 +21,7 @@ export default function Footer() {
           </div>
 
           {/* Right: Menu links */}
-          <div className="flex gap-8 text-sm md:text-base">
+          <div className="flex gap-8 text-sm md:text-base font-medium">
             <a
               href="#features"
               className="hover:text-white transition-colors duration-200"
@@ -44,7 +44,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Left: Crafted by */}
           <div className="flex items-center gap-3">
-            <p className="text-gray-500 text-sm">Crafted by</p>
+            <p className="text-white text-base font-medium">Crafted by</p>
             <Image
               src="/panorbit-logo.svg"
               alt="Panorbit logo"
@@ -55,7 +55,7 @@ export default function Footer() {
           </div>
 
           {/* Right: Copyright + Links */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 text-gray-500 text-sm text-center sm:text-right">
+          <div className="flex flex-col sm:flex-row items-center gap-4 text-white text-base font-medium text-center sm:text-right">
             <p>© Panlo 2025 All Rights Reserved.</p>
             <div className="flex items-center gap-4">
               <a

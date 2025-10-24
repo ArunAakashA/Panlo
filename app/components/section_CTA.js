@@ -7,11 +7,11 @@ export default function SectionCTA() {
   return (
     <section className="bg-bg-primary text-white py-5 px-4 pb-20">
       <div className="max-w-7xl mx-auto">
-        <div className="bg-gradient-to-r from-secondary to-primary rounded-2xl overflow-hidden grid md:grid-cols-[1fr_2fr] items-center p-10 pt-0 pr-0 pb-0 gap-6">
+        <div className="bg-gradient-to-r from-secondary to-primary border-2 border-secondary rounded-[24px] overflow-hidden grid md:grid-cols-[1fr_2fr] items-center p-10 pt-0 pr-0 pb-0 gap-6">
           
           {/* === LEFT SIDE CONTENT === */}
           <div className="space-y-6 pt-8 md:pb-10">
-            <h2 className="text-4xl md:text-5xl font-semibold leading-tight text-black">
+            <h2 className="text-4xl md:text-[56px] font-bold leading-tight text-black">
               Where creativity<br />meets clarity.
             </h2>
 
@@ -21,7 +21,7 @@ export default function SectionCTA() {
             >
               <span className="flex items-center justify-center gap-2">
                 {/* Text */}
-                <span className="transition-transform duration-300 translate-x-4 group-hover:-translate-x-0">
+                <span className="text-base font-semibold transition-transform duration-300 translate-x-4 group-hover:-translate-x-0">
                   Book a Demo
                 </span>
 
