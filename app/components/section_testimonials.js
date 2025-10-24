@@ -140,6 +140,7 @@ export default function SectionTestimonials() {
         .custom-pagination {
           position: relative;
           width: 9%;
+          max-width: 13%;
           height: 25px;
           margin: 0 auto;
           display: flex !important;
@@ -182,6 +183,7 @@ export default function SectionTestimonials() {
         @media only screen and (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
           .custom-pagination {
             width: 15%;
+            max-width: 15%;
             height: 24px;
           }
         }
@@ -189,6 +191,7 @@ export default function SectionTestimonials() {
         @media (max-width: 768px){
           .custom-pagination {
             width: 35%;
+            max-width: 35%;
           }
         }
       `}</style>
