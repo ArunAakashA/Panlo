@@ -19,11 +19,22 @@ export default function SectionHowItWorks_1() {
     const line = section.querySelector(".theLine");
     const ball = section.querySelector(".glow-ball");
 
-    // Set initial states (prevents flicker)
+    // Prevent flicker on start
     gsap.set(line, { drawSVG: "0%" });
     gsap.set(ball, { opacity: 1, scale: 1 });
 
-    // Timeline for glowing line & ball in sync
+    // --- ✅ Custom throttle function ---
+    const throttle = (fn, delay) => {
+      let last = 0;
+      return (...args) => {
+        const now = Date.now();
+        if (now - last >= delay) {
+          last = now;
+          fn(...args);
+        }
+      };
+    };
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: svg,
@@ -33,7 +44,16 @@ export default function SectionHowItWorks_1() {
       },
     });
 
-    // Ball moves first (leading)
+    let lastProgress = -1;
+    const throttledUpdate = throttle(() => {
+      const progress = Math.round(tl.progress() * 100);
+      if (progress !== lastProgress) {
+        gsap.set(line, { drawSVG: `0% ${progress}%` });
+        lastProgress = progress;
+      }
+    }, 25); // Throttle every 25ms
+
+    // Ball motion
     tl.to(
       ball,
       {
@@ -44,15 +64,12 @@ export default function SectionHowItWorks_1() {
         },
         ease: "none",
         duration: 2,
-        onUpdate: () => {
-          // As the ball moves, dynamically draw the line behind it
-          const progress = tl.progress() * 100;
-          gsap.set(line, { drawSVG: `0% ${progress}%` });
-        },
+        onUpdate: throttledUpdate,
       },
       0
     );
 
+    // Subtle glowing pulse
     gsap.to(ball, {
       scale: 1.1,
       duration: 1.4,
@@ -60,8 +77,13 @@ export default function SectionHowItWorks_1() {
       yoyo: true,
       ease: "sine.inOut",
     });
-  }, []);
 
+    // ✅ Only clean up this section's GSAP instance
+    return () => {
+      if (tl.scrollTrigger) tl.scrollTrigger.kill();
+      tl.kill();
+    };
+  }, []);
 
   return (
     <section
@@ -90,10 +112,12 @@ export default function SectionHowItWorks_1() {
       {/* Fade overlay */}
       <div className="absolute top-0 h-[150px] w-full bg-gradient-to-b from-bg-primary via-bg-primary/80 to-transparent pointer-events-none z-20"></div>
 
-      {/* Content (untouched, no animation) */}
+      {/* Content */}
       <div className="content-section relative z-10 mt-[300px] flex flex-col items-center text-center space-y-4 w-full max-w-[900px] px-6">
         <h2 className="text-[40px] font-bold text-white">Create & Upload</h2>
-        <p className="text-gray-300 text-base font-medium">Add assets or link a live site.</p>
+        <p className="text-gray-300 text-base font-medium">
+          Add assets or link a live site.
+        </p>
 
         <div className="w-full mt-6 rounded-xl shadow-lg overflow-hidden">
           <Image
@@ -106,11 +130,13 @@ export default function SectionHowItWorks_1() {
         </div>
       </div>
 
-      {/* Component-scoped styles */}
+      {/* Scoped styles */}
       <style jsx>{`
         .theLine {
           filter: drop-shadow(0 0 20px #0ab5a9) drop-shadow(0 0 40px #0ab5a9);
           will-change: stroke-dashoffset;
+          vector-effect: non-scaling-stroke;
+          shape-rendering: geometricPrecision;
         }
 
         .glow-ball {
@@ -125,8 +151,9 @@ export default function SectionHowItWorks_1() {
 
         .glowline-svg {
           transform: translateZ(0);
+          backface-visibility: hidden;
+          will-change: transform, opacity;
         }
-
       `}</style>
 
       {/* Decorative stars */}

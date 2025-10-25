@@ -10,56 +10,61 @@ import DecorStar from "../decor_star";
 
 gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, MotionPathPlugin);
 
-export default function SectionHowItWorks_2() {
+export default function SectionHowItWorks_1() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
     const section = sectionRef.current;
+    if (!section) return;
+
     const svg = section.querySelector(".glowline-svg");
     const line = section.querySelector(".theLine");
     const ball = section.querySelector(".glow-ball");
 
-    // Initial states (no flicker)
-    gsap.set(line, { drawSVG: "0%" });
+    // Initial setup
+    gsap.set(line, { drawSVG: "0% 0%" });
     gsap.set(ball, { opacity: 1, scale: 1 });
 
-    // Ball leads + line follows
+    // Create timeline and scrollTrigger
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: svg,
-        start: "top center",
-        end: "bottom center",
-        scrub: true,
+        start: "top center+=100",
+        end: "bottom center-=50",
+        scrub: 1,
       },
     });
 
-    // Ball moves along the line
-    tl.to(
-      ball,
-      {
-        motionPath: {
-          path: line,
-          align: line,
-          alignOrigin: [0.5, 0.5],
-        },
-        ease: "none",
-        duration: 2,
-        onUpdate: () => {
-          const progress = tl.progress() * 100;
-          gsap.set(line, { drawSVG: `0% ${progress}%` });
-        },
+    // Line and ball animation
+    tl.to(ball, {
+      motionPath: {
+        path: line,
+        align: line,
+        alignOrigin: [0.5, 0.5],
       },
-      0
-    );
+      ease: "none",
+      duration: 2,
+      onUpdate: () => {
+        const progress = tl.progress() * 100;
+        gsap.set(line, { drawSVG: `0% ${progress}%` });
+      },
+    });
 
-    // Continuous glowing pulse effect
-    gsap.to(ball, {
-      scale: 1.2,
+    // Subtle glow pulse
+    const glowPulse = gsap.to(ball, {
+      scale: 1.12,
       duration: 1.5,
       repeat: -1,
       yoyo: true,
       ease: "sine.inOut",
     });
+
+    // ✅ Cleanup with kill()
+    return () => {
+      if (tl.scrollTrigger) tl.scrollTrigger.kill(); // kill this scroll trigger
+      tl.kill(); // kill timeline
+      glowPulse.kill(); // kill infinite pulse animation
+    };
   }, []);
 
   return (
@@ -67,8 +72,8 @@ export default function SectionHowItWorks_2() {
       ref={sectionRef}
       className="relative bg-bg-primary min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* SVG Line + Glowing Ball */}
-      <div className="absolute top-0 flex justify-center">
+      {/* SVG Glow Line + Ball */}
+      <div className="absolute top-0 flex justify-center will-change-transform">
         <svg
           className="glowline-svg w-[200px] h-[250px] overflow-visible"
           xmlns="http://www.w3.org/2000/svg"
@@ -82,16 +87,16 @@ export default function SectionHowItWorks_2() {
             strokeWidth="3px"
             strokeLinecap="round"
           />
-          <circle className="glow-ball" r="10" cx="100" cy="5"></circle>
+          <circle className="glow-ball" r="10" cx="100" cy="5" />
         </svg>
       </div>
 
-      {/* Fade mask overlay for top line fade effect */}
-      <div className="absolute top-0 h-[150px] w-full bg-gradient-to-b from-bg-primary via-bg-primary/80 to-transparent pointer-events-none z-10"></div>
+      {/* Top Fade Gradient */}
+      <div className="absolute top-0 h-[150px] w-full bg-gradient-to-b from-bg-primary via-bg-primary/80 to-transparent pointer-events-none z-20"></div>
 
-      {/* Section Content */}
-      <div className="content-section relative z-10 mt-[300px] flex flex-col items-center text-center space-y-4 w-full max-w-[900px] px-6">
-        <h2 className="text-[40px] font-bold text-white">Review & Collaborate</h2>
+      {/* Content Section */}
+      <div className="relative z-10 mt-[300px] flex flex-col items-center text-center space-y-4 w-full max-w-[900px] px-6">
+        <h2 className="text-2xl lg:text-[40px] font-bold text-white">Review & Collaborate</h2>
         <p className="text-gray-300 text-base font-medium">
           Real-time feedback, version histories, team clarity.
         </p>
@@ -107,9 +112,12 @@ export default function SectionHowItWorks_2() {
         </div>
       </div>
 
+      {/* Component-scoped styles */}
       <style jsx>{`
         .theLine {
-          filter: drop-shadow(0 0 20px #0ab5a9) drop-shadow(0 0 40px #0ab5a9);
+          filter: drop-shadow(0 0 16px #0ab5a9) drop-shadow(0 0 36px #0ab5a9);
+          vector-effect: non-scaling-stroke;
+          shape-rendering: geometricPrecision;
           will-change: stroke-dashoffset;
         }
 
@@ -118,10 +126,11 @@ export default function SectionHowItWorks_2() {
           stroke: #0ab5a9;
           stroke-width: 4px;
           opacity: 1;
-          filter: drop-shadow(0 0 30px #0ab5a9) drop-shadow(0 0 60px #0ab5a9);
+          filter: drop-shadow(0 0 25px #0ab5a9) drop-shadow(0 0 40px #0ab5a9);
           transform-origin: center;
           will-change: transform, opacity;
         }
+          
       `}</style>
 
       {/* Decorative Stars */}

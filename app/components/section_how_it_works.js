@@ -9,7 +9,7 @@ export default function SectionHowItWorks() {
     <section id="how" className="overflow-hidden">
       {/* Main Heading */}
       <div className="pt-20 text-center z-10">
-        <h1 className="text-[56px] font-bold text-white">
+        <h1 className="text-4xl lg:text-[56px] font-bold text-white">
           How It
           <span className="text-secondary ml-3">Works</span>
         </h1>

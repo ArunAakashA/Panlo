@@ -7,7 +7,7 @@ export default function SectionInsights() {
     <section className="bg-bg-tertiary text-white py-20 px-4">
       <div className="max-w-7xl mx-auto space-y-16">
         {/* === MAIN HEADING === */}
-        <h2 className="text-[56px] font-bold leading-tight text-center">
+        <h2 className="text-4xl lg:text-[56px] font-bold leading-tight text-center">
           <span className="text-secondary">Insights</span> That Work Harder
         </h2>
 
@@ -27,7 +27,7 @@ export default function SectionInsights() {
 
           {/* RIGHT SIDE (Text Content) */}
           <div className="space-y-4">
-            <h3 className="text-[32px] font-bold text-white">
+            <h3 className="text-2xl lg:text-[32px] font-bold text-white">
               AI Marketing Intelligence
             </h3>
             <p className="font-medium text-gray-400 leading-relaxed">
@@ -40,7 +40,7 @@ export default function SectionInsights() {
         <div className="lg:pl-20 pl-0 grid md:grid-cols-[1fr_1.5fr] gap-10 items-center">
           {/* LEFT SIDE (Text Content) */}
           <div className="space-y-4">
-            <h3 className="text-[32px] font-bold text-white">
+            <h3 className="text-2xl lg:text-[32px] font-bold text-white">
               One Dashboard to Rule Them All
             </h3>
             <p className="font-medium text-gray-400 leading-relaxed">

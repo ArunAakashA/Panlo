@@ -7,7 +7,7 @@ export default function SectionReview() {
     <section className="bg-bg-tertiary text-white py-20 mb-0 px-4">
       <div className="max-w-7xl mx-auto space-y-16">
         {/* === HEADING === */}
-        <h2 className="text-[56px] font-bold leading-tight text-center">
+        <h2 className="text-4xl lg:text-[56px] font-bold leading-tight text-center">
           <span className="text-secondary">Review</span> Without the Runaround
         </h2>
 
