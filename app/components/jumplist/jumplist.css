@@ -32,7 +32,7 @@
 /* Inner centered area to keep visual alignment with page content */
 .jumplist-inner {      /* tune to your site's container width */
   margin: 0 auto;
-  padding: 10px 0px 20px 0px;
+  padding: 5px 0px 10px 0px;
   box-sizing: border-box;
   position: relative;
 }
