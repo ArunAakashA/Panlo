@@ -30,8 +30,8 @@ export default function SectionHowItWorks_3() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: svg,
-          start: "top center+=50",
-          end: "bottom center-=50",
+          start: "top 80%",
+          end: "bottom center",
           scrub: 1,
         },
       });
@@ -92,7 +92,7 @@ export default function SectionHowItWorks_3() {
       </div>
 
       {/* Top Fade Mask */}
-      <div className="absolute top-0 h-[150px] w-full bg-gradient-to-b from-bg-primary via-bg-primary/80 to-transparent pointer-events-none z-10"></div>
+      <div className="absolute top-0 h-[200px] w-full bg-gradient-to-b from-bg-primary via-bg-primary/80 to-transparent pointer-events-none z-10"></div>
 
       {/* Section Content */}
       <div className="relative z-10 mt-[300px] flex flex-col items-center text-center space-y-4 w-full max-w-[900px] px-6">

@@ -1,13 +1,79 @@
+/* jumplist.css - safe layout for sticky jumplist */
+
 .jumplist-header {
-  backdrop-filter: blur(6px);
-  background-color: rgba(6,16,22,0.95);
-  transition: all .3s ease;
-  z-index: 40;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  z-index: 999;
 }
+
+.jumplist-header.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Outer wrapper: allow overflow so SVGs/animations are not clipped */
+.jumplist-section {
+  width: 100%;
+  overflow: visible;
+  position: relative;
+}
+
+/* Full-viewport sticky wrapper (prevents computed left/width offsets) */
 #jumplist-pin-spacer {
   position: sticky;
-  top: 0;
+  left: 0;            /* important: full viewport width for pin */
+  z-index: 20;
+  background-color: rgba(6,16,22,0.95);
+  backdrop-filter: blur(6px);
+  pointer-events: auto;
 }
+
+/* Inner centered area to keep visual alignment with page content */
+.jumplist-inner {      /* tune to your site's container width */
+  margin: 0 auto;
+  padding: 10px 0px 20px 0px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Tabs row */
+.jumplist-tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Tab button styles */
+.jumplist-tab {
+  background: none;
+  border: none;
+  padding: 6px 2px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #9aa3ad;         /* inactive color */
+  transition: color 220ms ease, transform 220ms ease;
+}
+.jumplist-tab:hover { color: #ffffff; transform: translateY(-1px); }
+.jumplist-tab.active { color: #ffffff; }
+
+/* Underline indicator (we base width on scroll progress in JS) */
+.jumplist-underline {
+  position: absolute;/* aligns underline inside inner container */
+  bottom: 0;
+  height: 2px;
+  background: #0AB5A9;    /* primary color */
+  transition: width 300ms ease, transform 300ms ease;
+  z-index: 10;
+}
+
+/* Section node spacing (so each section has breathing room) */
+.jumplist-node {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+/* small-screen: hide sticky bar */
 @media (max-width: 767px) {
   #jumplist-pin-spacer { display: none; }
 }

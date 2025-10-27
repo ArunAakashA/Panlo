@@ -71,13 +71,13 @@ export default function SectionHowItWorks_1() {
       {/* Glowing Line + Ball */}
       <div className="absolute top-0 flex justify-center">
         <svg
-          className="glowline-svg w-[200px] h-[250px] overflow-visible"
+          className="glowline-svg w-[200px] h-[450px] overflow-visible"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 200 250"
+          viewBox="0 0 200 450"
         >
           <path
             className="theLine"
-            d="M 100 0 L 100 250"
+            d="M 100 0 L 100 450"
             fill="none"
             stroke="#0AB5A9"
             strokeWidth="3px"

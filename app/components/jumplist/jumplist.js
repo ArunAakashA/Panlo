@@ -3,114 +3,138 @@
 import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import "./jumplist.css";
 
 import SectionHowItWorks_1 from "../ComponentCustomJSON/section_how_it_works_1";
 import SectionHowItWorks_2 from "../ComponentCustomJSON/section_how_it_works_2";
 import SectionHowItWorks_3 from "../ComponentCustomJSON/section_how_it_works_3";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-// Safe version of useLayoutEffect
-const useIsomorphicLayoutEffect =
-  typeof window !== "undefined" ? useEffect : () => {};
-
-const JumplistNode = ({ nodeID, children }) => <div id={nodeID}>{children}</div>;
+/* Simple node wrapper */
+const JumplistNode = ({ nodeID, children }) => (
+  <div id={nodeID} className="jumplist-node">
+    {children}
+  </div>
+);
 
 export default function Jumplist({ json }) {
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const [progress, setProgress] = useState(0);
+  const [topOffset, setTopOffset] = useState(0);
 
-  useIsomorphicLayoutEffect(() => {
+  /* compute header height and expose CSS var for sticky top */
+  useEffect(() => {
+    const computeHeader = () => {
+      const hdr = document.querySelector("header#global-header") || document.querySelector("header");
+      const h = hdr ? Math.round(hdr.getBoundingClientRect().height) : 0;
+      setTopOffset(h);
+      document.documentElement.style.setProperty("--jumplist-top-offset", `${h}px`);
+      // refresh ScrollTrigger after DOM/layout changes
+      ScrollTrigger.refresh();
+    };
+
+    computeHeader();
+    window.addEventListener("resize", computeHeader);
+    // in SPAs header might change after load — do a delayed refresh
+    const t = setTimeout(() => ScrollTrigger.refresh(), 300);
+
+    return () => {
+      window.removeEventListener("resize", computeHeader);
+      clearTimeout(t);
+    };
+  }, []);
+
+  /* create the pin ScrollTrigger (only on desktop via matchMedia) */
+  useEffect(() => {
     if (!sectionRef.current || !headingRef.current) return;
 
-    let mm = gsap.matchMedia();
+    const mm = gsap.matchMedia();
 
     mm.add("(min-width: 768px)", () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top+=60px top",
-          end: "bottom bottom",
-          scrub: true,
-          onEnter: () => gsap.to(headingRef.current, { autoAlpha: 1, y: 0, duration: 0.4 }),
-          onLeaveBack: () => gsap.to(headingRef.current, { autoAlpha: 0, y: -40, duration: 0.3 }),
-          onLeave: () => gsap.to(headingRef.current, { autoAlpha: 0, y: -40, duration: 0.3 }),
-          onEnterBack: () => gsap.to(headingRef.current, { autoAlpha: 1, y: 0, duration: 0.4 }),
-        },
-      });
-
-      ScrollTrigger.create({
+      const st = ScrollTrigger.create({
         trigger: sectionRef.current,
-        start: "top top+=60px",
+        start: `top top+=${topOffset + 0}`,
         end: "bottom bottom-=120px",
         pin: headingRef.current,
         pinSpacing: false,
+        onToggle: (self) => {
+          // toggle visibility when section enters/leaves
+          headingRef.current.classList.toggle("is-visible", self.isActive);
+        },
         onUpdate: (self) => setProgress(parseFloat(self.progress.toFixed(2))),
       });
 
       return () => {
-        tl.scrollTrigger?.kill();
-        mm.revert();
+        st.kill();
       };
     });
 
     return () => mm.revert();
-  }, []);
+  }, [topOffset]);
 
-  // smooth scrollToSection unchanged
+
+  /* smooth scroll to section using ScrollToPlugin */
   const scrollToSection = (id) => {
-    const target = document.getElementById(id);
-    if (!target) return;
+    const el = document.getElementById(id);
+    if (!el) return;
     gsap.to(window, {
-      scrollTo: { y: target, offsetY: 80 },
-      duration: 1.2,
+      duration: 0.9,
       ease: "power3.inOut",
+      scrollTo: { y: el, offsetY: topOffset + 12 },
     });
   };
 
   return (
-    <div ref={sectionRef} className="relative container mx-auto overflow-x-hidden">
-      <div
-        ref={headingRef}
-        id="jumplist-pin-spacer"
-        className="z-20 hidden md:block w-screen !left-0 bg-bg-primary border-b border-primary/30 overflow-x-hidden sticky top-0 opacity-0 -translate-y-10 pointer-events-none"
-      >
-        <div className="flex justify-center gap-60 pt-7 pb-4 relative">
-          {json.tabs.map((tab, index) => (
-            <button
-              key={index}
-              onClick={() => scrollToSection(`node-${index}`)}
-              className={`cursor-pointer font-semibold transition-colors duration-300 ${
-                progress * 3 >= index
-                  ? "text-white"
-                  : "text-gray-400"
-              }`}
-            >
-              {tab.title}
-            </button>
-          ))}
+    <div ref={sectionRef} className="jumplist-section">
+      {/* full-bleed sticky element (keeps computed left = 0) */}
+      <div ref={headingRef} id="jumplist-pin-spacer" className="jumplist-header">
+        <div className="jumplist-inner">
+          <div className="jumplist-tabs gap-60">
+            {json.tabs.map((tab, i) => (
+              <button
+                key={i}
+                onClick={() => scrollToSection(`node-${i}`)}
+                className={`jumplist-tab ${progress * 3 >= i ? "active" : ""}`}
+                aria-label={`Jump to ${tab.title}`}
+              >
+                {tab.title}
+              </button>
+            ))}
+          </div>
 
           <div
-            className="absolute bottom-0 left-0 h-[2px] bg-primary transition-all duration-500 ease-in-out"
-            style={{ width: `${progress * 100}%` }}
-          ></div>
+            className="jumplist-underline"
+            style={{ width: `${Math.max(6, progress * 100)}%` }}
+            aria-hidden="true"
+          />
         </div>
       </div>
 
+      {/* sections */}
       {json.tabs.map((tab, index) => {
-        const Wrapper = ({ children }) => (
-          <JumplistNode nodeID={`node-${index}`}>{children}</JumplistNode>
-        );
-
+        const id = `node-${index}`;
         switch (tab.componentType) {
           case "create-upload":
-            return <Wrapper key={index}><SectionHowItWorks_1 /></Wrapper>;
+            return (
+              <JumplistNode key={id} nodeID={id}>
+                <SectionHowItWorks_1 />
+              </JumplistNode>
+            );
           case "review-collaborate":
-            return <Wrapper key={index}><SectionHowItWorks_2 /></Wrapper>;
+            return (
+              <JumplistNode key={id} nodeID={id}>
+                <SectionHowItWorks_2 />
+              </JumplistNode>
+            );
           case "sync-strategize":
-            return <Wrapper key={index}><SectionHowItWorks_3/></Wrapper>;
+            return (
+              <JumplistNode key={id} nodeID={id}>
+                <SectionHowItWorks_3 />
+              </JumplistNode>
+            );
           default:
             return null;
         }

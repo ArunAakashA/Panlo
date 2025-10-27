@@ -15,73 +15,55 @@ export default function SectionHowItWorks_1() {
 
   useEffect(() => {
     const section = sectionRef.current;
+    if (!section) return;
+
     const svg = section.querySelector(".glowline-svg");
     const line = section.querySelector(".theLine");
     const ball = section.querySelector(".glow-ball");
 
-    // Prevent flicker on start
-    gsap.set(line, { drawSVG: "0%" });
+    // Initial setup
+    gsap.set(line, { drawSVG: "0% 0%" });
     gsap.set(ball, { opacity: 1, scale: 1 });
 
-    // --- ✅ Custom throttle function ---
-    const throttle = (fn, delay) => {
-      let last = 0;
-      return (...args) => {
-        const now = Date.now();
-        if (now - last >= delay) {
-          last = now;
-          fn(...args);
-        }
-      };
-    };
-
+    // Create timeline and scrollTrigger
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: svg,
-        start: "top center",
+        start: "top 80%",
         end: "bottom center",
-        scrub: true,
+        scrub: 1,
       },
     });
 
-    let lastProgress = -1;
-    const throttledUpdate = throttle(() => {
-      const progress = Math.round(tl.progress() * 100);
-      if (progress !== lastProgress) {
-        gsap.set(line, { drawSVG: `0% ${progress}%` });
-        lastProgress = progress;
-      }
-    }, 25); // Throttle every 25ms
-
-    // Ball motion
-    tl.to(
-      ball,
-      {
-        motionPath: {
-          path: line,
-          align: line,
-          alignOrigin: [0.5, 0.5],
-        },
-        ease: "none",
-        duration: 2,
-        onUpdate: throttledUpdate,
+    // Line and ball animation
+    tl.to(ball, {
+      motionPath: {
+        path: line,
+        align: line,
+        alignOrigin: [0.5, 0.5],
       },
-      0
-    );
+      ease: "none",
+      duration: 2,
+      onUpdate: () => {
+        const progress = tl.progress() * 100;
+        gsap.set(line, { drawSVG: `0% ${progress}%` });
+      },
+    });
 
-    // Subtle glowing pulse
-    gsap.to(ball, {
-      scale: 1.1,
-      duration: 1.4,
+    // Subtle glow pulse
+    const glowPulse = gsap.to(ball, {
+      scale: 1.12,
+      duration: 1.5,
       repeat: -1,
       yoyo: true,
       ease: "sine.inOut",
     });
 
-    // ✅ Only clean up this section's GSAP instance
+    // ✅ Cleanup with kill()
     return () => {
-      if (tl.scrollTrigger) tl.scrollTrigger.kill();
-      tl.kill();
+      if (tl.scrollTrigger) tl.scrollTrigger.kill(); // kill this scroll trigger
+      tl.kill(); // kill timeline
+      glowPulse.kill(); // kill infinite pulse animation
     };
   }, []);
 
@@ -90,8 +72,8 @@ export default function SectionHowItWorks_1() {
       ref={sectionRef}
       className="relative bg-bg-primary min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* Glowing Line + Ball */}
-      <div className="absolute top-0 flex justify-center">
+      {/* SVG Glow Line + Ball */}
+      <div className="absolute top-0 flex justify-center will-change-transform">
         <svg
           className="glowline-svg w-[200px] h-[250px] overflow-visible"
           xmlns="http://www.w3.org/2000/svg"
@@ -105,16 +87,16 @@ export default function SectionHowItWorks_1() {
             strokeWidth="3px"
             strokeLinecap="round"
           />
-          <circle className="glow-ball" r="10" cx="100" cy="5"></circle>
+          <circle className="glow-ball" r="10" cx="100" cy="5" />
         </svg>
       </div>
 
-      {/* Fade overlay */}
-      <div className="absolute top-0 h-[150px] w-full bg-gradient-to-b from-bg-primary via-bg-primary/80 to-transparent pointer-events-none z-20"></div>
+      {/* Top Fade Gradient */}
+      <div className="absolute top-0 h-[200px] w-full bg-gradient-to-b from-bg-primary via-bg-primary/80 to-transparent pointer-events-none z-10"></div>
 
-      {/* Content */}
-      <div className="content-section relative z-10 mt-[300px] flex flex-col items-center text-center space-y-4 w-full max-w-[900px] px-6">
-        <h2 className="text-[40px] font-bold text-white">Create & Upload</h2>
+      {/* Content Section */}
+      <div className="relative z-10 mt-[300px] flex flex-col items-center text-center space-y-4 w-full max-w-[900px] px-6">
+        <h2 className="text-2xl lg:text-[40px] font-bold text-white">Create & Upload</h2>
         <p className="text-gray-300 text-base font-medium">
           Add assets or link a live site.
         </p>
@@ -122,7 +104,7 @@ export default function SectionHowItWorks_1() {
         <div className="w-full mt-6 rounded-xl shadow-lg overflow-hidden">
           <Image
             src="/images/create&upload.webp"
-            alt="Create & Upload"
+            alt="Review & Collaborate"
             width={900}
             height={500}
             className="w-full h-auto object-cover"
@@ -130,35 +112,31 @@ export default function SectionHowItWorks_1() {
         </div>
       </div>
 
-      {/* Scoped styles */}
+      {/* Component-scoped styles */}
       <style jsx>{`
         .theLine {
-          filter: drop-shadow(0 0 20px #0ab5a9) drop-shadow(0 0 40px #0ab5a9);
-          will-change: stroke-dashoffset;
+          filter: drop-shadow(0 0 16px #0ab5a9) drop-shadow(0 0 36px #0ab5a9);
           vector-effect: non-scaling-stroke;
           shape-rendering: geometricPrecision;
+          will-change: stroke-dashoffset;
         }
 
         .glow-ball {
           fill: #061016;
           stroke: #0ab5a9;
           stroke-width: 4px;
-          opacity: 0;
-          filter: drop-shadow(0 0 25px #0ab5a9);
+          opacity: 1;
+          filter: drop-shadow(0 0 25px #0ab5a9) drop-shadow(0 0 40px #0ab5a9);
           transform-origin: center;
           will-change: transform, opacity;
         }
-
-        .glowline-svg {
-          transform: translateZ(0);
-          backface-visibility: hidden;
-          will-change: transform, opacity;
-        }
+          
       `}</style>
 
       {/* Decorative stars */}
       <DecorStar position="top-0 right-80" size={40} delay={0.8} glow={false} float={false} />
       <DecorStar position="bottom-140 left-30" size={40} delay={1.4} glow={false} float={false} />
+
     </section>
   );
 }
