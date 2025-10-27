@@ -8,8 +8,8 @@
 
   --color-bg-primary: #030F18;
   --color-bg-secondary: #0C151B;
-  --color-bg-tertiary : #0E1E24;
-  --color-bg-fourth : #14242F;
+  --color-bg-tertiary: #0E1E24;
+  --color-bg-fourth: #14242F;
 
   --gradient-1: linear-gradient(270deg, #0AB5A9 0%, #77F1FF 100%);
 
@@ -36,8 +36,8 @@
   --color-black: var(--color-black);
   --color-bg-primary: var(--color-bg-primary);
   --color-bg-secondary: var(--color-bg-secondary);
-  --color-bg-tertiary : var(--color-bg-tertiary);
-  --color-bg-fourth : var(--color-bg-fourth);
+  --color-bg-tertiary: var(--color-bg-tertiary);
+  --color-bg-fourth: var(--color-bg-fourth);
 
   --font-sans: var(--font-jakarta);
 
@@ -61,4 +61,10 @@ body {
   background-color: var(--color-bg-primary);
   color: var(--color-tertiary);
   font-family: var(--font-jakarta);
+}
+
+@media (max-width: 767px) {
+  .mobile-bg {
+    background: var(--color-bg-primary);
+  }
 }

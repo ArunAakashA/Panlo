@@ -190,7 +190,7 @@ export default function SectionTestimonials() {
 
         @media (max-width: 768px){
           .custom-pagination {
-            width: 38%;
+            width: 40%;
             max-width: 35%;
           }
         }

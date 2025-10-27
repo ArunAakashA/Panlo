@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <header className="fixed w-full top-0 z-50 md:bg-bg-primary/80 md:backdrop-blur-md md:border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between mobile-bg">
         {/* === Logo === */}
         <Link href="/" className="flex items-center">
           <Image
@@ -88,7 +88,7 @@ export default function Header() {
       {/* === Mobile Menu === */}
       <div
         ref={menuRef}
-        className={`md:hidden bg-bg-primary border-t border-white/10 transition-all duration-300 ease-in-out ${
+        className={`md:hidden mobile-bg bg-bg-primary border-t border-white/10 transition-all duration-300 ease-in-out ${
           isOpen
             ? "opacity-100 translate-y-0 visible"
             : "opacity-0 -translate-y-2 invisible"

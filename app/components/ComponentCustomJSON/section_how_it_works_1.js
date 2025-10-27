@@ -59,7 +59,6 @@ export default function SectionHowItWorks_1() {
       ease: "sine.inOut",
     });
 
-    // ✅ Cleanup with kill()
     return () => {
       if (tl.scrollTrigger) tl.scrollTrigger.kill(); // kill this scroll trigger
       tl.kill(); // kill timeline
