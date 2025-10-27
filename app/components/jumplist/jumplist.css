@@ -56,7 +56,7 @@
   position: absolute;
   bottom: 0;
   height: 2px;
-  background: #0AB5A9;    
+  background: #77F1FF;    
   transition: width 300ms ease, transform 300ms ease;
   z-index: 10;
 }

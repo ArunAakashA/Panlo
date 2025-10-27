@@ -67,4 +67,12 @@ body {
   .mobile-bg {
     background: var(--color-bg-primary);
   }
+  .how-it-works{
+    margin-bottom: -150px;
+  }
+}
+
+.video-br{
+  background: #FFFFFF1A;
+  backdrop-filter: blur(4px);
 }

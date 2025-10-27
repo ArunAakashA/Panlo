@@ -6,7 +6,7 @@ export default function SectionVideo() {
   return (
     <section className="bg-bg-primary text-white pt-20 px-4 lg:px-0">
       <div className="max-w-7xl mx-auto">
-        <div className="relative w-full overflow-hidden rounded-xl p-[6px] bg-gradient-to-r from-primary via-primary to-primary shadow-[0_0_64px_-1px_#0AB5A940]">
+        <div className="video-br relative w-full overflow-hidden rounded-2xl p-[6px] bg-gradient-to-r from-primary via-primary to-primary shadow-[0_0_64px_-1px_#0AB5A940]">
           <div className="rounded-xl overflow-hidden bg-primary">
             <video
               className="w-full h-auto object-cover block"
@@ -26,7 +26,7 @@ export default function SectionVideo() {
 
       {/* Stars */}
       <DecorStar position="top-300 right-10" size={40} delay={0.8} glow={false} float={false}/>
-      <DecorStar position="top-370 left-80" size={40} delay={1.4}  glow={false} float={false}/>
+      <DecorStar position="top-375 left-80" size={40} delay={1.4}  glow={false} float={false}/>
     </section>
   );
 }

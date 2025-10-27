@@ -31,7 +31,7 @@ export default function SectionHowItWorks_3() {
         scrollTrigger: {
           trigger: svg,
           start: "top 80%",
-          end: "bottom center",
+          end: "center center",
           scrub: 1,
         },
       });
@@ -70,20 +70,20 @@ export default function SectionHowItWorks_3() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-bg-primary min-h-screen flex flex-col items-center justify-center overflow-hidden pb-20"
+      className="how-it-works relative bg-bg-primary min-h-screen flex flex-col items-center justify-center overflow-hidden pb-20"
     >
       {/* SVG Line + Glowing Ball */}
       <div className="absolute top-0 flex justify-center will-change-transform">
         <svg
-          className="glowline-svg w-[200px] h-[250px] overflow-visible"
+          className="glowline-svg w-[200px] h-[150px] lg:h-[250px] overflow-visible"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 200 250"
+          viewBox="0 0 200 150"
         >
           <path
             className="theLine"
-            d="M 100 0 L 100 250"
+            d="M 100 0 L 100 150"
             fill="none"
-            stroke="#0AB5A9"
+            stroke="#77F1FF"
             strokeWidth="3px"
             strokeLinecap="round"
           />
@@ -95,7 +95,7 @@ export default function SectionHowItWorks_3() {
       <div className="absolute top-0 h-[200px] w-full bg-gradient-to-b from-bg-primary via-bg-primary/80 to-transparent pointer-events-none z-10"></div>
 
       {/* Section Content */}
-      <div className="relative z-10 mt-[300px] flex flex-col items-center text-center space-y-4 w-full max-w-[900px] px-6">
+      <div className="relative z-10 mt-[100px] lg:mt-[240px] flex flex-col items-center text-center space-y-4 w-full max-w-[900px] px-6">
         <h2 className="text-2xl lg:text-[40px] font-bold text-white">Sync & Strategize</h2>
         <p className="text-gray-300 text-base font-medium">
           Insights + approvals aligned. Ready to ship.
@@ -115,7 +115,7 @@ export default function SectionHowItWorks_3() {
       {/* Component Scoped Styles */}
       <style jsx>{`
         .theLine {
-          filter: drop-shadow(0 0 18px #0ab5a9) drop-shadow(0 0 36px #0ab5a9);
+          filter: drop-shadow(0 0 18px #77F1FF) drop-shadow(0 0 36px #77F1FF);
           vector-effect: non-scaling-stroke;
           shape-rendering: geometricPrecision;
           will-change: stroke-dashoffset;
@@ -123,18 +123,18 @@ export default function SectionHowItWorks_3() {
 
         .glow-ball {
           fill: #061016;
-          stroke: #0ab5a9;
+          stroke: #77F1FF;
           stroke-width: 4px;
           opacity: 1;
-          filter: drop-shadow(0 0 30px #0ab5a9) drop-shadow(0 0 60px #0ab5a9);
+          filter: drop-shadow(0 0 30px #77F1FF) drop-shadow(0 0 60px #77F1FF);
           transform-origin: center;
           will-change: transform;
         }
       `}</style>
 
       {/* Decorative Stars */}
-      <DecorStar position="top-140 right-30" size={40} delay={0.8} glow={false} float={false} />
-      <DecorStar position="top-283 left-75" size={40} delay={1.4} glow={false} float={false} />
+      <DecorStar position="top-60 right-30" size={40} delay={0.8} glow={false} float={false} />
+      <DecorStar position="top-200 left-75" size={40} delay={1.4} glow={false} float={false} />
     </section>
   );
 }

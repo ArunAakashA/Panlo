@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function SectionFeatures() {
   return (
-    <section id="features" className="bg-bg-primary text-white pt-20 py-20 px-4">
+    <section id="features" className="bg-bg-primary text-white pt-40 py-20 px-4">
       <div className="max-w-7xl mx-auto space-y-10">
 
         {/* === ROW 1 === */}
