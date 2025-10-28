@@ -1,13 +1,46 @@
 "use client";
 
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import Image from "next/image";
 
+gsap.registerPlugin(ScrollTrigger);
+
+
 export default function SectionCTA() {
+
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    gsap.fromTo(
+      section,
+      { opacity: 0.02, y: 120, scale: 0.7 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 90%",  
+          end: "top center",    
+          scrub: 1.8,       
+        },
+      }
+    );
+
+
+  }, []);
+
   return (
     <section className="bg-bg-primary text-white py-0 md:py-5 px-4 pb-15 md:pb-20">
-      <div className="max-w-7xl mx-auto">
-        <div className="bg-gradient-to-r from-secondary to-primary rounded-[24px] overflow-hidden grid md:grid-cols-[1fr_2fr] items-center p-10 pt-0 pr-0 pb-0 gap-6">
+      <div ref={sectionRef} className="origin-center max-w-7xl mx-auto">
+        <div className="bg-gradient-to-r from-secondary to-primary rounded-2xl overflow-hidden grid md:grid-cols-[1fr_2fr] items-center p-10 pt-0 pr-0 pb-0 gap-6">
 
           {/* === LEFT SIDE CONTENT === */}
           <div className="space-y-6 pt-8 md:pb-10">
@@ -16,8 +49,8 @@ export default function SectionCTA() {
             </h2>
 
             <Link
-              href="#book" // you can change this target as needed
-              className="group relative inline-flex items-center justify-center px-6 py-3 rounded-full border border-[#071a20] text-[#071a20] font-medium overflow-hidden transition-all duration-300"
+              href="#book"
+              className="group relative inline-flex items-center justify-center px-6 py-3 rounded-full border border-black text-black font-medium overflow-hidden transition-all duration-300"
             >
               <span className="flex items-center justify-center gap-2">
                 {/* Text */}

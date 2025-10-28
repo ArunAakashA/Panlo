@@ -1,12 +1,63 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function SectionTestimonials() {
+  const swiperRef = useRef(null);
+  const paginationRef = useRef(null);
+
+  useEffect(() => {
+    const swiper = swiperRef.current;
+    const pagination = paginationRef.current;
+    if (!swiper || !pagination) return;
+
+    // === Animate Swiper (cards) ===
+    gsap.fromTo(
+      swiper,
+      { opacity: 0.05, y: 120, scale: 0.9 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: swiper,
+          start: "top 90%",
+          end: "top 40%",
+          scrub: 1.6,
+        },
+      }
+    );
+
+    // === Animate Pagination Dots (after swiper) ===
+    gsap.fromTo(
+      pagination,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: swiper,
+          start: "top 80%",
+          end: "top 35%",
+          scrub: 1.6,
+        },
+      }
+    );
+
+    gsap.ticker.lagSmoothing(1000, 16);
+  }, []);
+
   const testimonials = [
     {
       id: 1,
@@ -77,66 +128,72 @@ export default function SectionTestimonials() {
         </h2>
 
         {/* === EDGE GRADIENTS === */}
-        {/* Hidden on mobile and iPad, visible only on desktop (≥1024px) */}
         <div className="hidden lg:block absolute left-0 top-0 h-full w-32 xl:w-40 bg-gradient-to-r from-bg-primary via-bg-primary/90 to-transparent pointer-events-none z-20"></div>
         <div className="hidden lg:block absolute right-0 top-0 h-full w-32 xl:w-40 bg-gradient-to-l from-bg-primary via-bg-primary/90 to-transparent pointer-events-none z-20"></div>
 
         {/* === SWIPER SLIDER === */}
-        <Swiper
-          modules={[Pagination, Autoplay]}
-          loop={true}
-          centeredSlides={true}
-          spaceBetween={24}
-          autoplay={{
-            delay: 4000,
-            disableOnInteraction: false,
-          }}
-          pagination={{
-            clickable: true,
-            el: ".custom-pagination",
-          }}
-          breakpoints={{
-            0: { slidesPerView: 1, centeredSlides: true },
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 2.5 },
-            1440: { slidesPerView: 3 },
-          }}
-          className="!pb-0"
+        <div
+          ref={swiperRef}
+          className="opacity-0 translate-y-20 scale-90 will-change-transform origin-center"
         >
-          {testimonials.map((t) => (
-            <SwiperSlide key={t.id}>
-              <div className="bg-bg-tertiary rounded-xl p-6 sm:p-8 text-left shadow-lg transition-all duration-300 hover:scale-[1.02] h-full flex flex-col justify-between">
-                <div>
-                  <p className="font-bold text-gray-300/70 mb-4">{t.company}</p>
-                  <p className="text-gray-400 leading-relaxed">{t.feedback}</p>
-                </div>
-
-                <div className="flex items-center gap-3 mt-6">
-                  <div className="relative w-10 h-10">
-                    <Image
-                      src={t.avatar}
-                      alt={t.name}
-                      fill
-                      className="rounded-full object-cover"
-                    />
-                  </div>
+          <Swiper
+            modules={[Pagination, Autoplay]}
+            loop={true}
+            centeredSlides={true}
+            spaceBetween={24}
+            autoplay={{
+              delay: 4000,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+              el: ".custom-pagination",
+            }}
+            breakpoints={{
+              0: { slidesPerView: 1, centeredSlides: true },
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 2.5 },
+              1440: { slidesPerView: 3 },
+            }}
+            className="!pb-0"
+          >
+            {testimonials.map((t) => (
+              <SwiperSlide key={t.id}>
+                <div className="bg-bg-tertiary rounded-2xl p-6 sm:p-8 text-left shadow-lg transition-all duration-300 hover:scale-[1.02] h-full flex flex-col justify-between">
                   <div>
-                    <p className="font-medium text-white">{t.name}</p>
-                    <p className="text-gray-500 text-sm">{t.role}</p>
+                    <p className="font-bold text-gray-300/70 mb-4">{t.company}</p>
+                    <p className="text-gray-400 leading-relaxed">{t.feedback}</p>
+                  </div>
+
+                  <div className="flex items-center gap-3 mt-6">
+                    <div className="relative w-10 h-10">
+                      <Image
+                        src={t.avatar}
+                        alt={t.name}
+                        fill
+                        className="rounded-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <p className="font-medium text-white">{t.name}</p>
+                      <p className="text-gray-500 text-sm">{t.role}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
 
         {/* === CUSTOM DOTS === */}
-        <div className="custom-pagination flex justify-center gap-2 mt-6"></div>
+        <div
+          ref={paginationRef}
+          className="custom-pagination flex justify-center gap-2 mt-6 opacity-0 translate-y-10 will-change-transform"
+        ></div>
       </div>
 
       {/* === DOT STYLE === */}
       <style jsx global>{`
-        /* === Pagination Container === */
         .custom-pagination {
           position: relative;
           width: 9%;
@@ -152,18 +209,6 @@ export default function SectionTestimonials() {
           overflow: hidden;
         }
 
-        /* === Fading Edges (left & right glow) === */
-        .custom-pagination::before,
-        .custom-pagination::after {
-          content: "";
-          position: absolute;
-          top: 0;
-          width: 80px;
-          height: 100%;
-          pointer-events: none;
-        }
-
-        /* === Dots === */
         .custom-pagination .swiper-pagination-bullet {
           width: 8px;
           height: 8px;
@@ -173,29 +218,19 @@ export default function SectionTestimonials() {
           transition: all 0.4s ease;
         }
 
-        /* === Active Dot === */
         .custom-pagination .swiper-pagination-bullet-active {
-          background: #0ab5a9;
-          box-shadow: 0 0 10px #0ab5a9, 0 0 25px #0ab5a980;
+          background: var(--color-primary);
+          box-shadow: 0 0 10px var(--color-primary), 0 0 25px #0ab5a980;
           transform: scale(1.1);
         }
 
-        @media only screen and (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
-          .custom-pagination {
-            width: 15%;
-            max-width: 15%;
-            height: 24px;
-          }
-        }
-
-        @media (max-width: 768px){
+        @media (max-width: 768px) {
           .custom-pagination {
             width: 40%;
             max-width: 40%;
           }
         }
       `}</style>
-
     </section>
   );
 }

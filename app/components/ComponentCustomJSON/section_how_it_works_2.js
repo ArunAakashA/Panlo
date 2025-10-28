@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, MotionPathPlugin);
 
 export default function SectionHowItWorks_1() {
   const sectionRef = useRef(null);
+  const contentRef = useRef(null);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -52,6 +53,23 @@ export default function SectionHowItWorks_1() {
       },
     });
 
+    gsap.fromTo(
+      contentRef.current,
+      { opacity: 0.02, y: 120, scale: 0.8 }, 
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: contentRef.current,
+          start: "top 150%",   
+          end: "top 30%",   
+          scrub: 1.6,        
+        },
+      }
+    );
+
     return () => {
       if (tl.scrollTrigger) tl.scrollTrigger.kill();
       tl.kill();
@@ -81,11 +99,6 @@ export default function SectionHowItWorks_1() {
               </feMerge>
             </filter>
 
-            {/* Circular fade gradient */}
-            {/* <radialGradient id="outer-glow-gradient" cx="50%" cy="50%" r="50%">
-              <stop offset="30%" stopColor="#77F1FF" stopOpacity="1" />
-              <stop offset="100%" stopColor="#77F1FF" stopOpacity="0" />
-            </radialGradient> */}
           </defs>
 
           {/* Glowing vertical line */}
@@ -93,7 +106,7 @@ export default function SectionHowItWorks_1() {
             className="theLine"
             d="M 100 0 L 100 150"
             fill="none"
-            stroke="#77F1FF"
+            stroke="var(--color-secondary)"
             strokeWidth="6px"
             strokeLinecap="round"
           />
@@ -119,13 +132,13 @@ export default function SectionHowItWorks_1() {
       <div className="absolute top-0 h-[200px] w-full bg-gradient-to-b from-bg-primary via-bg-primary/80 to-transparent pointer-events-none z-10"></div>
 
       {/* Content Section */}
-      <div className="relative z-10 mt-[50px] lg:mt-[240px] flex flex-col items-center text-center space-y-4 w-full max-w-[900px] px-6">
+      <div ref={contentRef} className="origin-center relative z-10 mt-[50px] lg:mt-[240px] flex flex-col items-center text-center space-y-4 w-full max-w-[900px] px-6">
         <h2 className="text-2xl lg:text-[40px] font-bold text-white">Review & Collaborate</h2>
         <p className="text-gray-300 text-base font-medium">
           Real-time feedback, version histories, team clarity.
         </p>
 
-        <div className="w-full mt-6 rounded-xl shadow-lg overflow-hidden">
+        <div className="w-full mt-6 rounded-2xl shadow-lg overflow-hidden">
           <Image
             src="/images/review&collobarate.webp"
             alt="Review & Collaborate"
@@ -139,18 +152,18 @@ export default function SectionHowItWorks_1() {
       {/* Scoped CSS */}
       <style jsx>{`
         .theLine {
-          filter: drop-shadow(0 0 16px #77F1FF) drop-shadow(0 0 36px #77F1FF);
+          filter: drop-shadow(0 0 16px var(--color-secondary)) drop-shadow(0 0 36px var(--color-secondary));
           vector-effect: non-scaling-stroke;
           shape-rendering: geometricPrecision;
           will-change: stroke-dashoffset;
         }
 
         .glow-ball {
-          fill: #061016;
-          stroke: #77F1FF;
+          fill: var(--color-black);
+          stroke: var(--color-secondary);
           stroke-width: 6px;
           opacity: 1;
-          filter: drop-shadow(0 0 25px #77F1FF) drop-shadow(0 0 40px #77F1FF);
+          filter: drop-shadow(0 0 25px var(--color-secondary)) drop-shadow(0 0 40px var(--color-secondary));
           transform-origin: center;
           will-change: transform, opacity;
         }
