@@ -1,71 +1,79 @@
 "use client";
 
-import Image from "next/image";
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import DecorStar from "./decor_star";
 
-export default function SectionReview() {
+gsap.registerPlugin(ScrollTrigger);
+
+export default function SectionVideo() {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    // Smoother fade + upward motion tied to scroll
+    gsap.fromTo(
+      section,
+      { opacity: 0, y: 100 },
+      {
+        opacity: 1,
+        y: 0,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 90%",   // starts earlier for smoother entry
+          end: "top 10%",     // finishes slower for softer fade
+          scrub: 1.5,         // 1.5 adds inertia-like smoothing
+        },
+      }
+    );
+
+    // Global GSAP smoothing (prevents jitter)
+    gsap.ticker.lagSmoothing(1000, 16);
+  }, []);
+
   return (
-    <section className="bg-bg-tertiary text-white py-20 mb-0 px-4">
-      <div className="max-w-7xl mx-auto space-y-16">
-        {/* === HEADING === */}
-        <h2 className="text-4xl lg:text-[56px] font-bold leading-tight text-center">
-          <span className="text-secondary">Review</span> Without the Runaround
-        </h2>
-
-        {/* === 3-COLUMN GRID === */}
-        <div className="grid md:grid-cols-3 gap-10">
-          {/* === CARD 1 === */}
-          <div className="bg-bg-fourth rounded-lg p-8 pr-0 pb-0 space-y-4 text-center">
-            <h3 className="text-[24px] font-bold pr-8">Files, Meet Flow</h3>
-            <p className="font-medium text-gray-400 leading-relaxed pr-8">
-              PDFs, images, videos, all in one<br /> space.
-            </p>
-            <div className="mt-6 relative w-full h-auto">
-              <Image
-                src="/images/review-files.webp"
-                alt="Files dashboard preview"
-                width={800}
-                height={600}
-                className="w-full h-auto rounded-xl object-cover"
-                priority
-              />
-            </div>
-          </div>
-
-          {/* === CARD 2 === */}
-          <div className="bg-bg-fourth rounded-lg p-8 pr-0 pb-0 space-y-4 text-center">
-            <h3 className="text-[24px] font-bold pr-8">Review & Collaborate</h3>
-            <p className="font-medium text-gray-400 leading-relaxed pr-8">
-              Real-time feedback, <br />version histories, team clarity.
-            </p>
-            <div className="mt-6 relative w-full h-auto">
-              <Image
-                src="/images/review-collaborate.webp"
-                alt="Review and collaboration screen"
-                width={800}
-                height={600}
-                className="w-full h-auto rounded-xl object-cover"
-              />
-            </div>
-          </div>
-
-          {/* === CARD 3 === */}
-          <div className="bg-bg-fourth rounded-lg p-8 pr-0 pb-0 space-y-4 text-center">
-            <h3 className="text-[24px] font-bold pr-8">Versions on Demand</h3>
-            <p className="font-medium text-gray-400 leading-relaxed pr-8">
-              Compare iterations like a design <br />time traveler.
-            </p>
-            <div className="mt-6 relative w-full h-auto">
-              <Image
-                src="/images/review-versions.webp"
-                alt="Version comparison UI"
-                width={800}
-                height={600}
-                className="w-full h-auto rounded-xl object-cover"
-              />
-            </div>
+    <section
+      ref={sectionRef}
+      className="bg-bg-primary text-white pt-15 md:pt-20 px-4 lg:px-0 opacity-0 translate-y-20 will-change-transform transition-transform duration-1000 ease-out"
+    >
+      <div className="max-w-7xl mx-auto">
+        <div className="video-br relative w-full overflow-hidden rounded-2xl p-[6px] bg-gradient-to-r from-primary via-primary to-primary shadow-[0_0_64px_-1px_#0AB5A940]">
+          <div className="rounded-xl overflow-hidden bg-primary">
+            <video
+              className="w-full h-auto object-cover block"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              poster="/images/video-overlay.webp"
+            >
+              <source src="/videos/dashboard-showcase.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
       </div>
+
+      {/* Decorative stars */}
+      <DecorStar
+        position="top-300 right-10"
+        size={40}
+        delay={0.8}
+        glow={false}
+        float={false}
+      />
+      <DecorStar
+        position="top-375 left-80"
+        size={40}
+        delay={1.4}
+        glow={false}
+        float={false}
+      />
     </section>
   );
 }

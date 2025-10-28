@@ -67,7 +67,7 @@ export default function SectionTestimonials() {
   return (
     <section
       id="testimonials"
-      className="bg-bg-primary text-white py-20 px-4 relative overflow-hidden"
+      className="bg-bg-primary text-white py-15 md:py-20 px-4 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto text-center space-y-12 relative">
         {/* === HEADING === */}
@@ -107,7 +107,7 @@ export default function SectionTestimonials() {
             <SwiperSlide key={t.id}>
               <div className="bg-bg-tertiary rounded-xl p-6 sm:p-8 text-left shadow-lg transition-all duration-300 hover:scale-[1.02] h-full flex flex-col justify-between">
                 <div>
-                  <p className="font-semibold text-gray-300 mb-4">{t.company}</p>
+                  <p className="font-bold text-gray-300/70 mb-4">{t.company}</p>
                   <p className="text-gray-400 leading-relaxed">{t.feedback}</p>
                 </div>
 
@@ -190,8 +190,8 @@ export default function SectionTestimonials() {
 
         @media (max-width: 768px){
           .custom-pagination {
-            width: 38%;
-            max-width: 38%;
+            width: 40%;
+            max-width: 40%;
           }
         }
       `}</style>

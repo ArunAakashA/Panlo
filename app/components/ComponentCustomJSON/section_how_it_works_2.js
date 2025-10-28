@@ -20,12 +20,14 @@ export default function SectionHowItWorks_1() {
     const svg = section.querySelector(".glowline-svg");
     const line = section.querySelector(".theLine");
     const ball = section.querySelector(".glow-ball");
+    const outerGlow = section.querySelector(".outer-glow");
 
     // Initial setup
     gsap.set(line, { drawSVG: "0% 0%" });
     gsap.set(ball, { opacity: 1, scale: 1 });
+    gsap.set(outerGlow, { opacity: 1, scale: 1 });
 
-    // Create timeline and scrollTrigger
+    // Scroll-triggered line + ball animation
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: svg,
@@ -35,8 +37,8 @@ export default function SectionHowItWorks_1() {
       },
     });
 
-    // Line and ball animation
-    tl.to(ball, {
+    // Move both ball and glow along the path
+    tl.to([ball, outerGlow], {
       motionPath: {
         path: line,
         align: line,
@@ -50,19 +52,10 @@ export default function SectionHowItWorks_1() {
       },
     });
 
-    // Subtle glow pulse
-    const glowPulse = gsap.to(ball, {
-      scale: 1.12,
-      duration: 1.5,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-    });
-
     return () => {
-      if (tl.scrollTrigger) tl.scrollTrigger.kill(); // kill this scroll trigger
-      tl.kill(); // kill timeline
-      glowPulse.kill(); // kill infinite pulse animation
+      if (tl.scrollTrigger) tl.scrollTrigger.kill();
+      tl.kill();
+      glowPulse.kill();
     };
   }, []);
 
@@ -78,14 +71,46 @@ export default function SectionHowItWorks_1() {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 200 150"
         >
+          <defs>
+            {/* Soft glow filter for halo */}
+            <filter id="circular-glow" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="10" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+
+            {/* Circular fade gradient */}
+            {/* <radialGradient id="outer-glow-gradient" cx="50%" cy="50%" r="50%">
+              <stop offset="30%" stopColor="#77F1FF" stopOpacity="1" />
+              <stop offset="100%" stopColor="#77F1FF" stopOpacity="0" />
+            </radialGradient> */}
+          </defs>
+
+          {/* Glowing vertical line */}
           <path
             className="theLine"
             d="M 100 0 L 100 150"
             fill="none"
             stroke="#77F1FF"
-            strokeWidth="3px"
+            strokeWidth="6px"
             strokeLinecap="round"
           />
+
+          {/* Circular glow ring */}
+          <circle
+            className="outer-glow"
+            r="24"
+            cx="100"
+            cy="5"
+            stroke="url(#outer-glow-gradient)"
+            strokeWidth="8"
+            fill="#0AB5A933"
+            filter="url(#circular-glow)"
+          />
+
+          {/* Center glowing ball */}
           <circle className="glow-ball" r="10" cx="100" cy="5" />
         </svg>
       </div>
@@ -111,7 +136,7 @@ export default function SectionHowItWorks_1() {
         </div>
       </div>
 
-      {/* Component-scoped styles */}
+      {/* Scoped CSS */}
       <style jsx>{`
         .theLine {
           filter: drop-shadow(0 0 16px #77F1FF) drop-shadow(0 0 36px #77F1FF);
@@ -123,13 +148,12 @@ export default function SectionHowItWorks_1() {
         .glow-ball {
           fill: #061016;
           stroke: #77F1FF;
-          stroke-width: 4px;
+          stroke-width: 6px;
           opacity: 1;
           filter: drop-shadow(0 0 25px #77F1FF) drop-shadow(0 0 40px #77F1FF);
           transform-origin: center;
           will-change: transform, opacity;
         }
-          
       `}</style>
 
       {/* Decorative Stars */}

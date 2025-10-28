@@ -3,22 +3,22 @@ import Image from "next/image";
 
 export default function SectionFeatures() {
   return (
-    <section id="features" className="bg-bg-primary text-white pt-40 py-20 px-4">
+    <section id="features" className="bg-bg-primary text-white pt-30 md:pt-40 py-15 md:py-20 px-4">
       <div className="max-w-7xl mx-auto space-y-10">
 
         {/* === ROW 1 === */}
         <div className="bg-bg-tertiary rounded-2xl p-8 pr-0 lg:p-10 lg:pr-0 grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-8 lg:gap-10 items-center">
           {/* Left content */}
-          <div className="space-y-5 text-center lg:text-left pr-8 lg:pr-0">
+          <div className="space-y-5 text-left lg:text-left pr-8 lg:pr-0">
             <h2 className="text-4xl lg:text-[56px] font-bold leading-tight">
               Less mess. <span className="text-secondary">More magic</span>
             </h2>
-            <p className="text-gray-400 leading-relaxed font-medium text-base">
+            <p className="text-gray-400/90 leading-relaxed font-medium text-base">
               Creative chaos is real. Feedback scattered across emails, chats, screenshots
               which kills momentum. Panlo corrals the mess — projects, reviews, dashboards,
               and insights, all elegantly in one place.
             </p>
-            <p className="text-gray-400 leading-relaxed font-medium text-base">
+            <p className="text-gray-400/90 leading-relaxed font-medium text-base">
               Panlo is built for marketing teams across brands and agencies alike. One platform
               that keeps creators, managers, and clients perfectly in sync.
             </p>
@@ -46,7 +46,7 @@ export default function SectionFeatures() {
               <h3 className="text-xl font-bold text-secondary">
                 Project Management, Minus<br className="hidden lg:block" /> the Mayhem
               </h3>
-              <p className="text-gray-400 mt-2 font-medium">
+              <p className="text-gray-400/70 mt-2 font-medium">
                 Multiple accounts & role permissions made simple.
               </p>
             </div>
@@ -72,7 +72,7 @@ export default function SectionFeatures() {
                 <h3 className="text-xl font-bold text-secondary">
                   Admin Powers, Simplified
                 </h3>
-                <p className="text-gray-400 mt-2 font-medium">
+                <p className="text-gray-400/70 mt-2 font-medium">
                   Assign, revoke, control - without the headache.
                 </p>
               </div>
@@ -95,7 +95,7 @@ export default function SectionFeatures() {
                 <h3 className="text-xl font-bold text-secondary">
                   Template Treasure Trove
                 </h3>
-                <p className="text-gray-400 mt-2 font-medium">
+                <p className="text-gray-400/70 mt-2 font-medium">
                   Social posts, videos, websites. Ready to roll.
                 </p>
               </div>

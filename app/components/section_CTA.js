@@ -5,11 +5,9 @@ import Image from "next/image";
 
 export default function SectionCTA() {
   return (
-    <section className="bg-bg-primary text-white py-5 px-4 pb-20">
+    <section className="bg-bg-primary text-white py-0 md:py-5 px-4 pb-15 md:pb-20">
       <div className="max-w-7xl mx-auto">
-        <div style={{
-          borderImageSource: "linear-gradient(270deg, #77F1FF 0%, #0AB5A9 100%)",
-        }} className="bg-gradient-to-r from-secondary to-primary border-1 rounded-[24px] overflow-hidden grid md:grid-cols-[1fr_2fr] items-center p-10 pt-0 pr-0 pb-0 gap-6">
+        <div className="bg-gradient-to-r from-secondary to-primary rounded-[24px] overflow-hidden grid md:grid-cols-[1fr_2fr] items-center p-10 pt-0 pr-0 pb-0 gap-6">
 
           {/* === LEFT SIDE CONTENT === */}
           <div className="space-y-6 pt-8 md:pb-10">
