@@ -18,79 +18,134 @@ export default function SectionInsights() {
     const imgRight = section.querySelector(".img-right");
     const textBlocks = section.querySelectorAll(".text-block");
 
-    // === IMAGE 1: Left → Right ===
-    gsap.fromTo(
-      imgLeft,
-      { opacity: 0, x: -150, scale: 0.9 },
-      {
-        opacity: 1,
-        x: 0,
-        scale: 1,
-        ease: "power3.out",
+    const mm = gsap.matchMedia();
+
+    mm.add("(max-width: 767px)", () => {
+      const row1 = section.querySelector(".row-1");
+      const row2 = section.querySelector(".row-2");
+
+      const tl1 = gsap.timeline({
         scrollTrigger: {
-          trigger: imgLeft,
+          trigger: row1,
           start: "top 85%",
           end: "top 40%",
           scrub: 1.6,
         },
-      }
-    );
+      });
 
-    // === IMAGE 2: Right → Left ===
-    gsap.fromTo(
-      imgRight,
-      { opacity: 0, x: 150, scale: 0.9 },
-      {
-        opacity: 1,
-        x: 0,
-        scale: 1,
-        ease: "power3.out",
+      tl1
+        .fromTo(
+          imgLeft,
+          { opacity: 0, x: -120, scale: 0.9 },
+          { opacity: 1, x: 0, scale: 1, ease: "power3.out" },
+          0 
+        )
+        .fromTo(
+          textBlocks[0],
+          { opacity: 0, y: 80, scale: 0.9 },
+          { opacity: 1, y: 0, scale: 1, ease: "power3.out" },
+          0 
+        );
+
+      const tl2 = gsap.timeline({
         scrollTrigger: {
-          trigger: imgRight,
+          trigger: row2,
           start: "top 85%",
           end: "top 40%",
           scrub: 1.6,
         },
-      }
-    );
+      });
 
-    // === TEXT (Both): Bottom → Up + Fade ===
-    gsap.fromTo(
-      textBlocks,
-      { opacity: 0, y: 100, scale: 0.9 },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        ease: "power3.out",
-        stagger: 0.3,
-        scrollTrigger: {
-          trigger: section,
-          start: "top 85%",
-          end: "bottom center",
-          scrub: 2,
-        },
-      }
-    );
+      tl2
+        .fromTo(
+          imgRight,
+          { opacity: 0, x: 120, scale: 0.9 },
+          { opacity: 1, x: 0, scale: 1, ease: "power3.out" },
+          0
+        )
+        .fromTo(
+          textBlocks[1],
+          { opacity: 0, y: 80, scale: 0.9 },
+          { opacity: 1, y: 0, scale: 1, ease: "power3.out" },
+          0
+        );
+    });
+
+    mm.add("(min-width: 768px)", () => {
+      gsap.fromTo(
+        imgLeft,
+        { opacity: 0, x: -150, scale: 0.9 },
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: imgLeft,
+            start: "top 85%",
+            end: "top 40%",
+            scrub: 1.6,
+          },
+        }
+      );
+
+      gsap.fromTo(
+        imgRight,
+        { opacity: 0, x: 150, scale: 0.9 },
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: imgRight,
+            start: "top 85%",
+            end: "top 40%",
+            scrub: 1.6,
+          },
+        }
+      );
+
+      textBlocks.forEach((block) => {
+        gsap.fromTo(
+          block,
+          { opacity: 0, y: 100, scale: 0.9 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: block,
+              start: "top 85%",
+              end: "bottom center",
+              scrub: 1.6,
+            },
+          }
+        );
+      });
+    });
 
     gsap.ticker.lagSmoothing(1000, 16);
+
+    return () => mm.revert();
   }, []);
+
 
   return (
     <section
       ref={sectionRef}
-      className="bg-bg-tertiary text-white py-15 md:py-20 px-4 will-change-transform"
+      className="bg-bg-tertiary text-white pb-5 py-15 md:py-20 px-4 will-change-transform overflow-hidden"
     >
       <div className="max-w-7xl mx-auto space-y-16">
-        {/* === MAIN HEADING === */}
+
         <h2 className="text-4xl lg:text-[56px] font-bold leading-tight text-center opacity-90">
-          <span className="text-secondary">Insights</span> That Work Harder
+          <span className="text-secondary">Insights</span> That<span className="line-break"> Work Harder</span>
         </h2>
 
-        {/* === ROW 1 === */}
-        <div className="grid md:grid-cols-[1.5fr_1fr] gap-10 items-center">
-          {/* LEFT SIDE (Mascot + Chat Image) */}
-          <div className="img-left relative w-full h-auto opacity-0 translate-x-[-50px]">
+        {/* ROW 1 */}
+        <div className="row-1 grid md:grid-cols-[1.5fr_1fr] md:gap-10 gap-5 items-center">
+          <div className="img-left relative w-full h-auto opacity-0">
             <Image
               src="/images/AI-Marketing-Intelligence-Img.webp"
               alt="Mascot and chat illustration"
@@ -101,31 +156,19 @@ export default function SectionInsights() {
             />
           </div>
 
-          {/* RIGHT SIDE (Text Content) */}
-          <div className="text-block space-y-4 opacity-0 translate-y-10">
-            <h3 className="text-2xl lg:text-[32px] font-bold text-white">
+          <div className="text-block space-y-4 opacity-0">
+            <h3 className="text-2xl lg:text-[32px] font-bold text-white text-center md:text-left">
               AI Marketing Intelligence
             </h3>
-            <p className="font-medium text-gray-400 leading-relaxed">
+            <p className="font-medium text-gray-400 leading-relaxed text-center md:text-left">
               Past performance decoded into actionable next steps.
             </p>
           </div>
         </div>
 
-        {/* === ROW 2 === */}
-        <div className="lg:pl-20 pl-0 grid md:grid-cols-[1fr_1.5fr] gap-10 items-center">
-          {/* LEFT SIDE (Text Content) */}
-          <div className="text-block space-y-4 opacity-0 translate-y-10">
-            <h3 className="text-2xl lg:text-[32px] font-bold text-white">
-              One Dashboard to Rule<br /> Them All
-            </h3>
-            <p className="font-medium text-gray-400 leading-relaxed">
-              Compare iterations like a design time traveler.
-            </p>
-          </div>
-
-          {/* RIGHT SIDE (Dashboard Image) */}
-          <div className="img-right relative w-full h-auto opacity-0 translate-x-[50px]">
+        {/* ROW 2 */}
+        <div className="row-2 lg:pl-20 pl-0 grid md:grid-cols-[1fr_1.5fr] md:gap-10 gap-5 items-center">
+          <div className="img-right relative w-full h-auto opacity-0 order-1 md:order-2">
             <Image
               src="/images/Dashboard.webp"
               alt="Dashboard preview"
@@ -134,7 +177,19 @@ export default function SectionInsights() {
               className="w-full h-auto rounded-xl border object-cover"
             />
           </div>
+
+          <div className="text-block space-y-4 opacity-0 order-2 md:order-1">
+            <h3 className="text-2xl lg:text-[32px] font-bold text-white text-center md:text-left">
+              One Dashboard to Rule<br /> Them All
+            </h3>
+            <p className="font-medium text-gray-400 leading-relaxed text-center md:text-left">
+              Compare iterations like a design time traveler.
+            </p>
+          </div>
         </div>
+
+
+
       </div>
     </section>
   );

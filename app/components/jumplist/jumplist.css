@@ -1,5 +1,3 @@
-/* jumplist.css - safe layout for sticky jumplist */
-
 .jumplist-header {
   opacity: 0;
   visibility: hidden;
@@ -22,7 +20,7 @@
   position: sticky;
   left: 0;           
   z-index: 20;
-  background-color: rgba(6,16,22,0.95);
+  background-color: var(--color-bg-primary);
   backdrop-filter: blur(6px);
   pointer-events: auto;
 }
@@ -46,17 +44,17 @@
   padding: 6px 2px;
   font-weight: 700;
   cursor: pointer;
-  color: #9aa3ad;        
+  color: color-mix(in srgb, var(--color-white) 60%, transparent);     
   transition: color 220ms ease, transform 220ms ease;
 }
-.jumplist-tab:hover { color: #ffffff; transform: translateY(-1px); }
-.jumplist-tab.active { color: #ffffff; }
+.jumplist-tab:hover { color: var(--color-white); transform: translateY(-1px); }
+.jumplist-tab.active { color: var(--color-white); }
 
 .jumplist-underline {
   position: absolute;
   bottom: 0;
   height: 2px;
-  background: #77F1FF;    
+  background: var(--color-secondary);    
   transition: width 300ms ease, transform 300ms ease;
   z-index: 10;
 }

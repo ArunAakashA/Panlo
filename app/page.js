@@ -21,7 +21,7 @@ export default function Page() {
       <SectionVideo />
       <SectionFeatures />
       <SectionInsights />
-      <SectionReview />
+      <SectionReview /> 
       <SectionHowItWorks />
       <Jumplist json={homepageJson} />
       <SectionTestimonials />

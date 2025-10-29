@@ -18,7 +18,6 @@ export default function SectionFeatures() {
     const cont3 = section.querySelector(".cont-3");
     const cont4 = section.querySelector(".cont-4");
 
-    // --- Scroll Timeline ---
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
@@ -60,11 +59,11 @@ export default function SectionFeatures() {
     <section
       id="features"
       ref={sectionRef}
-      className="origin-center bg-bg-primary text-white pt-10 md:pt-15 py-15 md:py-20 px-4 will-change-transform"
+      className="origin-center bg-bg-primary text-white pt-0 md:pt-15 py-15 md:py-20 px-4 will-change-transform"
     >
       <div className="max-w-7xl mx-auto space-y-10">
 
-        {/* === ROW 1 === */}
+        {/* ROW 1 */}
         <div className="cont-1 bg-bg-tertiary rounded-2xl p-8 pr-0 lg:p-10 lg:pr-0 grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-8 lg:gap-10 items-center opacity-0 translate-y-20">
           <div className="space-y-5 text-left pr-8 lg:pr-0">
             <h2 className="text-4xl lg:text-[56px] font-bold leading-tight">
@@ -93,7 +92,7 @@ export default function SectionFeatures() {
           </div>
         </div>
 
-        {/* === ROW 2 === */}
+        {/* ROW 2 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
           {/* LEFT SIDE CONTAINER */}
           <div className="cont-2 bg-bg-tertiary rounded-2xl pt-8 pl-8 space-y-6 opacity-0 translate-y-20">

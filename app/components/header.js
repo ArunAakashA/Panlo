@@ -9,12 +9,12 @@ export default function Header() {
   const buttonRef = useRef(null);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 md:bg-bg-primary/80 md:backdrop-blur-md border-transparent">
-      {/* === Gradient Fading Border (absolute inside fixed header) === */}
-      <div className="absolute bottom-0 left-0 w-full h-[1px] md:bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none"></div>
+    <header className="fixed top-0 left-0 w-full z-50 lg:bg-bg-primary/80 lg:backdrop-blur-md border-transparent">
+      
+      <div className="absolute bottom-0 left-0 w-full h-[1px] lg:bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none"></div>
 
       <div className="max-w-7xl mobile-bg mx-auto px-6 py-4 flex items-center justify-between relative">
-        {/* === Logo === */}
+        
         <Link href="/" className="flex items-center">
           <Image
             src="/logo.svg"
@@ -26,8 +26,8 @@ export default function Header() {
           />
         </Link>
 
-        {/* === Desktop Navigation === */}
-        <nav className="hidden md:flex items-center gap-10 text-slate-300 md:pl-40">
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center gap-10 text-slate-300 lg:pl-40">
           <Link href="#features" className="text-lg hover:text-white transition">
             Features
           </Link>
@@ -39,9 +39,8 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* === Desktop Buttons (With Arrow Animation) === */}
-        <div className="hidden md:flex items-center gap-4">
-          {/* Book a Demo */}
+        {/* Desktop Buttons */}
+        <div className="hidden lg:flex items-center gap-4">
           <Link
             href="#book"
             className="group relative inline-flex items-center justify-center px-5 py-2.5 rounded-full text-base font-semibold text-black bg-gradient-to-r from-secondary to-primary shadow-md hover:opacity-90 transition overflow-hidden"
@@ -51,7 +50,6 @@ export default function Header() {
                 Book a Demo
               </span>
 
-              {/* Arrow animation */}
               <span className="inline-block overflow-hidden w-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +65,6 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* Login */}
           <Link
             href="#login"
             className="group relative inline-flex items-center justify-center px-5 py-2 rounded-full text-base font-semibold border border-secondary text-secondary hover:bg-primary/10 transition overflow-hidden"
@@ -77,7 +74,6 @@ export default function Header() {
                 Login
               </span>
 
-              {/* Arrow animation */}
               <span className="inline-block overflow-hidden w-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -94,11 +90,11 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* === Mobile Menu Toggle === */}
+        {/* Mobile Menu Toggle */}
         <button
           ref={buttonRef}
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-slate-200 z-50"
+          className="lg:hidden text-slate-200 z-50"
           aria-label="Toggle menu"
         >
           <svg
@@ -127,10 +123,10 @@ export default function Header() {
         </button>
       </div>
 
-      {/* === Mobile Menu === */}
+      {/* Mobile Menu */}
       <div
         ref={menuRef}
-        className={`md:hidden bg-bg-primary transition-all duration-300 ease-in-out ${isOpen
+        className={`lg:hidden bg-bg-primary transition-all duration-300 ease-in-out ${isOpen
             ? "opacity-100 translate-y-0 visible"
             : "opacity-0 -translate-y-2 invisible"
           }`}

@@ -5,7 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 
 export default function DecorStar({
-  size = 40, // base star size
+  size = 40,
   position = "left-6 top-1/3",
   glow = true,
   float = true,
@@ -18,7 +18,6 @@ export default function DecorStar({
     const el = starRef.current;
     if (!el) return;
 
-    // Floating motion (gentle up-down)
     if (float) {
       gsap.to(el, {
         y: -10,
@@ -30,7 +29,6 @@ export default function DecorStar({
       });
     }
 
-    // Alternating rotation + smooth grow/shrink using scale
     if (rotate) {
       const tl = gsap.timeline({
         repeat: -1,
@@ -44,7 +42,6 @@ export default function DecorStar({
         .to(el, { rotate: 90, scale: 0.875, duration: 2 });
     }
 
-    // Glowing pulse (gentle)
     if (glow) {
       gsap.to(el, {
         opacity: 0.9,
@@ -60,13 +57,12 @@ export default function DecorStar({
   return (
     <div
       ref={starRef}
-      // 👇 Responsive visibility control
       className={`hidden lg:block pointer-events-none absolute ${position} z-20`}
       style={{
         width: size,
         height: size,
         filter: glow
-          ? "drop-shadow(0 0 10px #0AB5A9) drop-shadow(0 0 20px #0AB5A9)"
+          ? "drop-shadow(0 0 10px var(--color-primary)) drop-shadow(0 0 20px var(--color-primary))"
           : "none",
         transformOrigin: "center center",
       }}

@@ -24,11 +24,9 @@ export default function SectionHowItWorks_3() {
       const ball = section.querySelector(".glow-ball");
       const outerGlow = section.querySelector(".outer-glow");
 
-      // Initial setup (no flicker)
       gsap.set(line, { drawSVG: "0% 0%" });
       gsap.set([ball, outerGlow], { opacity: 1, scale: 1 });
 
-      // Scroll animation (smooth scrub)
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: svg,
@@ -53,25 +51,23 @@ export default function SectionHowItWorks_3() {
       });
 
       gsap.fromTo(
-      contentRef.current,
-      { opacity: 0.02, y: 120, scale: 0.8 }, 
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: contentRef.current,
-          start: "top 150%",   
-          end: "top 30%",   
-          scrub: 1.6,        
-        },
-      }
-    );
+        contentRef.current,
+        { opacity: 0.02, y: 120, scale: 0.8 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: contentRef.current,
+            start: "top 150%",
+            end: "top 30%",
+            scrub: 1.6,
+          },
+        }
+      );
 
-      // Smooth scroll improvements
       gsap.ticker.lagSmoothing(1000, 16);
-      ScrollTrigger.normalizeScroll(true);
     }, section);
 
     return () => ctx.revert();
@@ -80,9 +76,8 @@ export default function SectionHowItWorks_3() {
   return (
     <section
       ref={sectionRef}
-      className="how-it-works relative bg-bg-primary min-h-screen flex flex-col items-center justify-center overflow-hidden pb-20"
+      className="how-it-works relative bg-bg-primary flex flex-col items-center justify-start overflow-hidden min-h-[60vh] lg:min-h-screen md:justify-center mt-[0px] sm:mt-[-30px] lg:mt-[-40px] pt-10 sm:pt-16 pb-5"
     >
-      {/* SVG Line + Glowing Ball + Outer Halo */}
       <div className="absolute top-0 flex justify-center will-change-transform">
         <svg
           className="glowline-svg w-[200px] h-[150px] lg:h-[250px] overflow-visible"
@@ -90,7 +85,6 @@ export default function SectionHowItWorks_3() {
           viewBox="0 0 200 150"
         >
           <defs>
-            {/* Soft circular glow filter */}
             <filter id="circular-glow" x="-100%" y="-100%" width="300%" height="300%">
               <feGaussianBlur stdDeviation="10" result="blur" />
               <feMerge>
@@ -100,7 +94,6 @@ export default function SectionHowItWorks_3() {
             </filter>
           </defs>
 
-          {/* Vertical glowing line */}
           <path
             className="theLine"
             d="M 100 0 L 100 150"
@@ -108,11 +101,17 @@ export default function SectionHowItWorks_3() {
             stroke="var(--color-secondary)"
             strokeWidth="6px"
             strokeLinecap="round"
+            style={{
+              filter:
+                "drop-shadow(0 0 18px var(--color-secondary)) drop-shadow(0 0 36px var(--color-secondary))",
+              vectorEffect: "non-scaling-stroke",
+              shapeRendering: "geometricPrecision",
+              willChange: "stroke-dashoffset",
+            }}
           />
 
-          {/* Outer glow ring */}
           <circle
-            className="outer-glow"
+            className="outer-glow opacity-80"
             r="24"
             cx="100"
             cy="0"
@@ -122,22 +121,33 @@ export default function SectionHowItWorks_3() {
             filter="url(#circular-glow)"
           />
 
-          {/* Core glow ball */}
           <circle
             className="glow-ball"
             r="10"
             cx="100"
             cy="0"
+            style={{
+              fill: "var(--color-black)",
+              stroke: "var(--color-secondary)",
+              strokeWidth: "6px",
+              filter:
+                "drop-shadow(0 0 30px var(--color-secondary)) drop-shadow(0 0 60px var(--color-secondary))",
+              transformOrigin: "center",
+              willChange: "transform",
+            }}
           />
         </svg>
       </div>
 
-      {/* Top Fade Mask */}
-      <div className="absolute top-0 h-[200px] w-full bg-gradient-to-b from-bg-primary via-bg-primary/80 to-transparent pointer-events-none z-10"></div>
+      <div className="absolute top-0 h-[100px] lg:h-[200px] w-full bg-gradient-to-b from-bg-primary via-bg-primary/80 to-transparent pointer-events-none z-10"></div>
 
-      {/* Section Content */}
-      <div ref={contentRef} className="origin-center relative z-10 mt-[100px] lg:mt-[240px] flex flex-col items-center text-center space-y-4 w-full max-w-[900px] px-6">
-        <h2 className="text-2xl lg:text-[40px] font-bold text-white">Sync & Strategize</h2>
+      <div
+        ref={contentRef}
+        className="origin-center relative z-10 mt-[160px] sm:mt-[120px] md:mt-[150px] lg:mt-[180px] flex flex-col items-center text-center space-y-4 w-full max-w-[900px] px-6"
+      >
+        <h2 className="text-2xl lg:text-[40px] font-bold text-white">
+          Sync & Strategize
+        </h2>
         <p className="text-gray-300 text-base font-medium">
           Insights + approvals aligned. Ready to ship.
         </p>
@@ -153,27 +163,6 @@ export default function SectionHowItWorks_3() {
         </div>
       </div>
 
-      {/* Component Scoped Styles */}
-      <style jsx>{`
-        .theLine {
-          filter: drop-shadow(0 0 18px var(--color-secondary)) drop-shadow(0 0 36px var(--color-secondary));
-          vector-effect: non-scaling-stroke;
-          shape-rendering: geometricPrecision;
-          will-change: stroke-dashoffset;
-        }
-
-        .glow-ball {
-          fill: var(--color-black);
-          stroke: var(--color-secondary);
-          stroke-width: 6px;
-          opacity: 1;
-          filter: drop-shadow(0 0 30px var(--color-secondary)) drop-shadow(0 0 60px var(--color-secondary));
-          transform-origin: center;
-          will-change: transform;
-        }
-      `}</style>
-
-      {/* Decorative Stars */}
       <DecorStar position="top-60 right-30" size={40} delay={0.8} glow={false} float={false} />
       <DecorStar position="top-200 left-75" size={40} delay={1.4} glow={false} float={false} />
     </section>

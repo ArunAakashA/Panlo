@@ -23,22 +23,19 @@ export default function SectionHowItWorks_1() {
     const ball = section.querySelector(".glow-ball");
     const outerGlow = section.querySelector(".outer-glow");
 
-    // Initial setup
     gsap.set(line, { drawSVG: "0% 0%" });
     gsap.set(ball, { opacity: 1, scale: 1 });
     gsap.set(outerGlow, { opacity: 0.9, scale: 1 });
 
-    // Create timeline and scrollTrigger
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: svg,
-        start: "top 80%",
-        end: "center center",
+        start: "top 150%",
+        end: "bottom center",
         scrub: 1,
       },
     });
 
-    // Line + ball + glow move animation
     tl.to([ball, outerGlow], {
       motionPath: {
         path: line,
@@ -55,7 +52,7 @@ export default function SectionHowItWorks_1() {
 
     gsap.fromTo(
       contentRef.current,
-      { opacity: 0.02, y: 120, scale: 0.8 }, 
+      { opacity: 0.02, y: 120, scale: 0.8 },
       {
         opacity: 1,
         y: 0,
@@ -63,28 +60,25 @@ export default function SectionHowItWorks_1() {
         ease: "power3.out",
         scrollTrigger: {
           trigger: contentRef.current,
-          start: "top 150%",   
-          end: "top 30%",   
-          scrub: 1.6,        
+          start: "top 150%",
+          end: "top 30%",
+          scrub: 1.6,
         },
       }
     );
 
-
-
     return () => {
       if (tl.scrollTrigger) tl.scrollTrigger.kill();
       tl.kill();
-      glowPulse.kill();
     };
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="how-it-works mt-[-40px] relative bg-bg-primary min-h-screen flex flex-col items-center justify-center overflow-hidden"
+      className="how-it-works relative bg-bg-primary flex flex-col items-center justify-start overflow-hidden min-h-[60vh] lg:min-h-screen md:justify-center mt-[0px] sm:mt-[-30px] lg:mt-[-40px] pt-10 sm:pt-16"
     >
-      {/* SVG Glow Line + Ball */}
+     
       <div className="absolute top-0 flex justify-center will-change-transform">
         <svg
           className="glowline-svg w-[200px] h-[150px] lg:h-[250px] overflow-visible"
@@ -92,7 +86,6 @@ export default function SectionHowItWorks_1() {
           viewBox="0 0 200 150"
         >
           <defs>
-            {/* Create circular soft glow filter */}
             <filter id="circular-glow" x="-100%" y="-100%" width="300%" height="300%">
               <feGaussianBlur stdDeviation="10" result="blur" />
               <feMerge>
@@ -100,22 +93,17 @@ export default function SectionHowItWorks_1() {
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
-
           </defs>
 
-          {/* Vertical path line */}
           <path
-            className="theLine"
+            className="theLine stroke-secondary stroke-[6px] rounded-[9999px] vector-effect-non-scaling-stroke shape-rendering-geometricPrecision drop-glow"
             d="M 100 0 L 100 150"
             fill="none"
-            stroke="var(--color-secondary)"
-            strokeWidth="6px"
             strokeLinecap="round"
           />
 
-          {/* Outer glow ring (circular gradient) */}
           <circle
-            className="outer-glow"
+            className="outer-glow opacity-80"
             r="24"
             cx="100"
             cy="5"
@@ -123,28 +111,35 @@ export default function SectionHowItWorks_1() {
             strokeWidth="8"
             fill="#0AB5A933"
             filter="url(#circular-glow)"
-            opacity="0.8"
           />
 
-          {/* Inner ball */}
+          
           <circle
             className="glow-ball"
             r="10"
             cx="100"
             cy="5"
+            style={{
+              fill: "var(--color-black)",
+              stroke: "var(--color-secondary)",
+              strokeWidth: "6px",
+              filter:
+                "drop-shadow(0 0 25px var(--color-secondary)) drop-shadow(0 0 40px var(--color-secondary))",
+              transformOrigin: "center",
+              willChange: "transform, opacity",
+            }}
           />
         </svg>
       </div>
 
-      {/* Top fade gradient (for visual depth) */}
-      <div className="absolute top-0 h-[200px] w-full bg-gradient-to-b from-bg-primary via-bg-primary/80 to-transparent pointer-events-none z-10"></div>
+      <div className="absolute top-0 h-[100px] lg:h-[200px] w-full bg-gradient-to-b from-bg-primary via-bg-primary/80 to-transparent pointer-events-none z-10"></div>
 
-      {/* Content Section */}
-      <div ref={contentRef} className="origin-center relative z-10 mt-[50px] lg:mt-[240px] flex flex-col items-center text-center space-y-4 w-full max-w-[900px] px-6">
+      <div
+        ref={contentRef}
+        className="origin-center relative z-10 mt-[160px] sm:mt-[120px] md:mt-[150px] lg:mt-[180px] flex flex-col items-center text-center space-y-4 w-full max-w-[900px] px-6"
+      >
         <h2 className="text-2xl lg:text-[40px] font-bold text-white">Create & Upload</h2>
-        <p className="text-gray-300 text-base font-medium">
-          Add assets or link a live site.
-        </p>
+        <p className="text-gray-300 text-base font-medium">Add assets or link a live site.</p>
 
         <div className="w-full mt-6 rounded-2xl shadow-lg overflow-hidden">
           <Image
@@ -157,27 +152,6 @@ export default function SectionHowItWorks_1() {
         </div>
       </div>
 
-      {/* Scoped CSS */}
-      <style jsx>{`
-        .theLine {
-          filter: drop-shadow(0 0 16px var(--color-secondary)) drop-shadow(0 0 36px var(--color-secondary));
-          vector-effect: non-scaling-stroke;
-          shape-rendering: geometricPrecision;
-          will-change: stroke-dashoffset;
-        }
-
-        .glow-ball {
-          fill: var(--color-black);
-          stroke: var(--color-secondary);
-          stroke-width: 6px;
-          opacity: 1;
-          filter: drop-shadow(0 0 25px var(--color-secondary)) drop-shadow(0 0 40px var(--color-secondary));
-          transform-origin: center;
-          will-change: transform, opacity;
-        }
-      `}</style>
-
-      {/* Decorative stars */}
       <DecorStar position="top-0 right-80" size={40} delay={0.8} glow={false} float={false} />
       <DecorStar position="bottom-140 left-30" size={40} delay={1.4} glow={false} float={false} />
     </section>

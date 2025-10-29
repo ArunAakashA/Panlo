@@ -12,9 +12,8 @@ import SectionHowItWorks_3 from "../ComponentCustomJSON/section_how_it_works_3";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-/* Simple node wrapper */
 const JumplistNode = ({ nodeID, children }) => (
-  <div id={nodeID} className="jumplist-node">
+  <div id={nodeID} className="jumplist-node m-0 p-0">
     {children}
   </div>
 );
@@ -25,20 +24,17 @@ export default function Jumplist({ json }) {
   const [progress, setProgress] = useState(0);
   const [topOffset, setTopOffset] = useState(0);
 
-  /* compute header height and expose CSS var for sticky top */
   useEffect(() => {
     const computeHeader = () => {
       const hdr = document.querySelector("header#global-header") || document.querySelector("header");
       const h = hdr ? Math.round(hdr.getBoundingClientRect().height) : 0;
       setTopOffset(h);
       document.documentElement.style.setProperty("--jumplist-top-offset", `${h}px`);
-      // refresh ScrollTrigger after DOM/layout changes
       ScrollTrigger.refresh();
     };
 
     computeHeader();
     window.addEventListener("resize", computeHeader);
-    // in SPAs header might change after load — do a delayed refresh
     const t = setTimeout(() => ScrollTrigger.refresh(), 300);
 
     return () => {
@@ -47,13 +43,12 @@ export default function Jumplist({ json }) {
     };
   }, []);
 
-  /* create the pin ScrollTrigger (only on desktop via matchMedia) */
   useEffect(() => {
     if (!sectionRef.current || !headingRef.current) return;
 
     const mm = gsap.matchMedia();
 
-    mm.add("(min-width: 768px)", () => {
+    mm.add("(min-width: 1024px)", () => {
       const st = ScrollTrigger.create({
         trigger: sectionRef.current,
         start: `top top+=${topOffset + 0}`,
@@ -61,7 +56,6 @@ export default function Jumplist({ json }) {
         pin: headingRef.current,
         pinSpacing: false,
         onToggle: (self) => {
-          // toggle visibility when section enters/leaves
           headingRef.current.classList.toggle("is-visible", self.isActive);
         },
         onUpdate: (self) => setProgress(parseFloat(self.progress.toFixed(2))),
@@ -75,8 +69,6 @@ export default function Jumplist({ json }) {
     return () => mm.revert();
   }, [topOffset]);
 
-
-  /* smooth scroll to section using ScrollToPlugin */
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -89,8 +81,7 @@ export default function Jumplist({ json }) {
 
   return (
     <div ref={sectionRef} className="jumplist-section">
-      {/* full-bleed sticky element (keeps computed left = 0) */}
-      <div ref={headingRef} id="jumplist-pin-spacer" className="jumplist-header">
+      <div ref={headingRef} id="jumplist-pin-spacer" className="jumplist-header lg-block">
         <div className="jumplist-inner">
           <div className="jumplist-tabs gap-60">
             {json.tabs.map((tab, i) => (
@@ -113,7 +104,6 @@ export default function Jumplist({ json }) {
         </div>
       </div>
 
-      {/* sections */}
       {json.tabs.map((tab, index) => {
         const id = `node-${index}`;
         switch (tab.componentType) {

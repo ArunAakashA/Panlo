@@ -14,19 +14,6 @@
   --gradient-1: linear-gradient(270deg, #0AB5A9 0%, #77F1FF 100%);
 
   --font-jakarta: var(--font-jakarta, "Plus Jakarta Sans"), sans-serif;
-
-  /* --text-xs: 16px;   
-  --text-sm: 18px;   
-  --text-md: 24px;  
-  --text-lg: 32px;  
-  --text-xl: 40px;   
-  --text-2xl: 56px;  
-  --text-3xl: 80px;  
-  
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700; */
 }
 
 @theme inline {
@@ -42,20 +29,59 @@
   --font-sans: var(--font-jakarta);
 
   --gradient-1: var(--gradient-1);
-
-  /* --text-xs: var(--text-xs);
-  --text-sm: var(--text-sm);
-  --text-md: var(--text-md);
-  --text-lg: var(--text-lg);
-  --text-xl: var(--text-xl);
-  --text-2xl: var(--text-2xl);
-  --text-3xl: var(--text-3xl); */
-
-  /* --font-weight-regular: var(--font-weight-regular);
-  --font-weight-medium: var(--font-weight-medium);
-  --font-weight-semibold: var(--font-weight-semibold);
-  --font-weight-bold: var(--font-weight-bold); */
 }
+
+@layer utilities {
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 25s linear infinite;
+  }
+
+  @media (max-width: 1024px) {
+    .animate-marquee {
+      animation-duration: 18s;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .animate-marquee {
+      animation-duration: 12s;
+    }
+  }
+  
+}
+
+.custom-pagination .swiper-pagination-bullet {
+  @apply w-2 h-2 rounded-full bg-white/60 transition-all duration-300;
+}
+
+.custom-pagination .swiper-pagination-bullet-active {
+  @apply bg-primary scale-110 shadow-[0_0_10px_theme(colors.primary),_0_0_25px_rgba(10,181,169,0.5)];
+}
+
+@media (max-width: 768px) {
+  .custom-pagination {
+    @apply w-[42%] max-w-[42%];
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .custom-pagination {
+    @apply w-[20%] max-w-[20%];
+  }
+  .mobile-bg {
+    background: var(--color-bg-primary);
+  }
+}
+
 
 body {
   background-color: var(--color-bg-primary);
@@ -63,16 +89,16 @@ body {
   font-family: var(--font-jakarta);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .mobile-bg {
     background: var(--color-bg-primary);
   }
-  .how-it-works{
-    margin-bottom: -150px;
+  .line-break{
+    display: block;
   }
 }
 
 .video-br{
-  background: #FFFFFF1A;
+  background: color-mix(in srgb, var(--color-white) 10%, transparent);
   backdrop-filter: blur(4px);
 }

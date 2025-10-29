@@ -43,15 +43,14 @@ export default function SectionReview() {
       className="origin-center bg-bg-tertiary text-white py-15 md:py-20 mb-0 px-4 will-change-transform"
     >
       <div className="max-w-7xl mx-auto space-y-16">
-        {/* === HEADING === */}
+
         <h2 className="text-4xl lg:text-[56px] font-bold leading-tight text-center opacity-90">
-          <span className="text-secondary">Review</span> Without the Runaround
+          <span className="text-secondary">Review</span> Without <span className="line-break">the Runaround</span>
         </h2>
 
-        {/* === 3-COLUMN GRID === */}
         <div className="grid md:grid-cols-3 gap-10">
-          {/* === CARD 1 === */}
-          <div className="card-1 bg-bg-fourth rounded-2xl p-8 pr-0 pb-0 space-y-4 text-center opacity-0 translate-y-20">
+          {/* CARD 1 */}
+          <div className="card-1 bg-bg-fourth rounded-2xl p-8 pr-0 pb-0 space-y-4 text-left md:text-center opacity-0 translate-y-20">
             <h3 className="text-[24px] font-bold pr-8">Files, Meet Flow</h3>
             <p className="font-medium text-gray-400 leading-relaxed pr-8">
               PDFs, images, videos, all in one <br /> space.
@@ -68,8 +67,8 @@ export default function SectionReview() {
             </div>
           </div>
 
-          {/* === CARD 2 === */}
-          <div className="card-2 bg-bg-fourth rounded-2xl p-8 pr-0 pb-0 space-y-4 text-center opacity-0 translate-y-20">
+          {/* CARD 2 */}
+          <div className="card-2 bg-bg-fourth rounded-2xl p-8 pr-0 pb-0 space-y-4 text-left md:text-center opacity-0 translate-y-20">
             <h3 className="text-[24px] font-bold pr-8">Review & Collaborate</h3>
             <p className="font-medium text-gray-400 leading-relaxed pr-8">
               Real-time feedback, <br />version histories, team clarity.
@@ -85,8 +84,8 @@ export default function SectionReview() {
             </div>
           </div>
 
-          {/* === CARD 3 === */}
-          <div className="card-3 bg-bg-fourth rounded-2xl p-8 pr-0 pb-0 space-y-4 text-center opacity-0 translate-y-20">
+          {/* CARD 3 */}
+          <div className="card-3 bg-bg-fourth rounded-2xl p-8 pr-0 pb-0 space-y-4 text-left md:text-center opacity-0 translate-y-20">
             <h3 className="text-[24px] font-bold pr-8">Versions on Demand</h3>
             <p className="font-medium text-gray-400 leading-relaxed pr-8">
               Compare iterations like a design <br />time traveler.

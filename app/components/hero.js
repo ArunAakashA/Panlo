@@ -5,20 +5,18 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden text-center">
       <div className="relative z-10 container mx-auto px-6 pt-36 pb-14">
-        {/* Hero Title */}
+
         <h1 className="text-5xl md:text-7xl lg:text-[80px] font-bold leading-tight bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
           Your Marketing Workflow
           <br />
           Simplified
         </h1>
 
-        {/* Subtitle */}
         <p className="mt-6 mx-auto text-slate-300 text-base md:text-base font-medium leading-relaxed px-4 md:px-10 lg:px-60">
           From PDFs to video to live websites, Panlo lets you manage, review, and sync
           everything in one place - powered by AI-driven insights and collaboration tools.
         </p>
 
-        {/* CTA Buttons */}
         <div className="mt-10 flex flex-wrap justify-center gap-4">
           <Link
             href="#book"
@@ -29,7 +27,6 @@ export default function Hero() {
                 Book a Demo
               </span>
 
-              {/* Arrow — slides in from right */}
               <span className="inline-block overflow-hidden w-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +51,6 @@ export default function Hero() {
                 Watch the Video
               </span>
 
-              {/* Arrow — slides in from right */}
               <span className="inline-block overflow-hidden w-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +68,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Stars (desktop only) */}
       <DecorStar
         position="top-120 right-65"
         size={40}

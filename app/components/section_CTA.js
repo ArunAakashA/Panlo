@@ -42,7 +42,6 @@ export default function SectionCTA() {
       <div ref={sectionRef} className="origin-center max-w-7xl mx-auto">
         <div className="bg-gradient-to-r from-secondary to-primary rounded-2xl overflow-hidden grid md:grid-cols-[1fr_2fr] items-center p-10 pt-0 pr-0 pb-0 gap-6">
 
-          {/* === LEFT SIDE CONTENT === */}
           <div className="space-y-6 pt-8 md:pb-10">
             <h2 className="text-4xl md:text-[50px] font-bold leading-tight text-black">
               Where creativity<br />meets clarity.
@@ -53,12 +52,11 @@ export default function SectionCTA() {
               className="group relative inline-flex items-center justify-center px-6 py-3 rounded-full border border-black text-black font-medium overflow-hidden transition-all duration-300"
             >
               <span className="flex items-center justify-center gap-2">
-                {/* Text */}
+
                 <span className="text-base font-semibold transition-transform duration-300 translate-x-4 group-hover:-translate-x-0">
                   Book a Demo
                 </span>
 
-                {/* Arrow – slides in from right */}
                 <span className="inline-block overflow-hidden w-5">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +73,6 @@ export default function SectionCTA() {
             </Link>
           </div>
 
-          {/* === RIGHT SIDE IMAGE === */}
           <div className="flex justify-end relative w-full h-auto md:mt-40 lg:mt-0">
             <Image
               src="/images/dashboard-preview.webp"

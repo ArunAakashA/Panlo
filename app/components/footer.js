@@ -4,9 +4,7 @@ export default function Footer() {
   return (
     <footer className="bg-bg-primary text-gray-400 pt-16 pb-10 px-4">
       <div className="max-w-7xl mx-auto space-y-10">
-        {/* === TOP ROW === */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Left: Panlo Logo */}
           <div className="flex-shrink-0">
             <Image
               src="/logo.svg"
@@ -18,7 +16,6 @@ export default function Footer() {
             />
           </div>
 
-          {/* Right: Menu links */}
           <div className="flex gap-8 text-sm md:text-base font-medium">
             <a
               href="#features"
@@ -35,12 +32,9 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* === DIVIDER === */}
         <div className="border-t border-gray-800"></div>
 
-        {/* === BOTTOM ROW === */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Left: Crafted by */}
           <div className="flex items-center gap-3">
             <p className="text-white text-base font-medium">Crafted by</p>
             <Image
@@ -52,7 +46,6 @@ export default function Footer() {
             />
           </div>
 
-          {/* Right: Copyright + Links */}
           <div className="flex flex-col sm:flex-row items-center gap-4 text-white text-base font-medium text-center sm:text-right">
             <p>© Panlo 2025 All Rights Reserved.</p>
             <div className="flex items-center gap-4">
