@@ -40,11 +40,11 @@ export default function SectionCTA() {
   return (
     <section className="bg-bg-primary text-white py-0 md:py-5 px-4 pb-15 md:pb-20">
       <div ref={sectionRef} className="origin-center max-w-7xl mx-auto">
-        <div className="bg-gradient-to-r from-secondary to-primary rounded-2xl overflow-hidden grid md:grid-cols-[1fr_2fr] items-center p-10 pt-0 pr-0 pb-0 gap-6">
+        <div className="bg-gradient-to-r from-secondary to-primary rounded-2xl overflow-hidden grid md:grid-cols-[1.5fr_2fr] items-center p-10 pt-0 pr-0 pb-0 gap-6">
 
-          <div className="space-y-6 pt-8 md:pb-10">
-            <h2 className="text-4xl md:text-[50px] font-bold leading-tight text-black">
-              Where creativity<br />meets clarity.
+          <div className="space-y-6 pt-8 md:pb-10 pr-10 md:pr-0">
+            <h2 className="text-4xl md:text-3xl lg:text-[50px] font-bold leading-tight text-black">
+              Where Creativity<br />Meets Clarity.
             </h2>
 
             <Link
@@ -73,7 +73,7 @@ export default function SectionCTA() {
             </Link>
           </div>
 
-          <div className="flex justify-end relative w-full h-auto md:mt-40 lg:mt-0">
+          <div className="flex justify-end relative w-full h-auto md:mt-15 lg:mt-0">
             <Image
               src="/images/dashboard-preview.webp"
               alt="Dashboard preview"

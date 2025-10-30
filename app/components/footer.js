@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -6,14 +7,16 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto space-y-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex-shrink-0">
-            <Image
-              src="/logo.svg"
-              alt="Panlo logo"
-              width={128}
-              height={40}
-              className="w-28 md:w-32 h-auto"
-              priority
-            />
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/logo.svg"
+                alt="Panlo Logo"
+                width={120}
+                height={40}
+                className="w-28 md:w-32 h-auto"
+                priority
+              />
+            </Link>
           </div>
 
           <div className="flex gap-8 text-sm md:text-base font-medium">

@@ -126,9 +126,9 @@ export default function SectionTestimonials() {
     >
       <div className="max-w-7xl mx-auto text-center space-y-12 relative">
 
-        <h2 className="text-3xl sm:text-4xl md:text-[56px] font-bold leading-tight">
-          Trusted by teams who value <br className="hidden sm:block" />
-          <span className="text-secondary">clarity with creativity</span>
+        <h2 className="text-4xl lg:text-[56px] font-bold leading-tight">
+          Trusted by Teams who Value <br className="hidden sm:block" />
+          <span className="text-secondary">Clarity with Creativity</span>
         </h2>
 
         <div className="hidden lg:block absolute left-0 top-0 h-full w-32 xl:w-40 bg-gradient-to-r from-bg-primary via-bg-primary/90 to-transparent pointer-events-none z-20"></div>

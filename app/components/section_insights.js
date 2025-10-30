@@ -140,7 +140,7 @@ export default function SectionInsights() {
       <div className="max-w-7xl mx-auto space-y-16">
 
         <h2 className="text-4xl lg:text-[56px] font-bold leading-tight text-center opacity-90">
-          <span className="text-secondary">Insights</span> That<span className="line-break"> Work Harder</span>
+          <span className="text-secondary">Insights</span> that<span className="line-break"> Work Harder</span>
         </h2>
 
         {/* ROW 1 */}
@@ -161,7 +161,7 @@ export default function SectionInsights() {
               AI Marketing Intelligence
             </h3>
             <p className="font-medium text-gray-400 leading-relaxed text-center md:text-left">
-              Past performance decoded into actionable next steps.
+              Past performance decoded into <span className="line-break">actionable next steps.</span>
             </p>
           </div>
         </div>
@@ -179,11 +179,11 @@ export default function SectionInsights() {
           </div>
 
           <div className="text-block space-y-4 opacity-0 order-2 md:order-1">
-            <h3 className="text-2xl lg:text-[32px] font-bold text-white text-center md:text-left">
-              One Dashboard to Rule<br /> Them All
+            <h3 className="text-2xl lg:text-[32px] font-bold text-white text-center md:text-left lg:pr-10">
+              One Dashboard to <span className="line-break">Rule Them All</span>
             </h3>
             <p className="font-medium text-gray-400 leading-relaxed text-center md:text-left">
-              Compare iterations like a design time traveler.
+              Compare iterations like a <span className="line-break">design time traveler.</span>
             </p>
           </div>
         </div>

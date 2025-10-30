@@ -36,9 +36,9 @@ export default function DecorStar({
         defaults: { ease: "sine.inOut" },
       });
 
-      tl.to(el, { rotate: -90, scale: 1.125, duration: 2 })
+      tl.to(el, { rotate: -90, scale: 1.4, duration: 2 })
         .to(el, { rotate: 90, scale: 0.875, duration: 2 })
-        .to(el, { rotate: -90, scale: 1.125, duration: 2 })
+        .to(el, { rotate: -90, scale: 1.4, duration: 2 })
         .to(el, { rotate: 90, scale: 0.875, duration: 2 });
     }
 

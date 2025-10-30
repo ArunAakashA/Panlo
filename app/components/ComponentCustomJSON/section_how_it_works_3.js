@@ -146,7 +146,7 @@ export default function SectionHowItWorks_3() {
         className="origin-center relative z-10 mt-[160px] sm:mt-[120px] md:mt-[150px] lg:mt-[180px] flex flex-col items-center text-center space-y-4 w-full max-w-[900px] px-6"
       >
         <h2 className="text-2xl lg:text-[40px] font-bold text-white">
-          Sync & Strategize
+          Sync & Strategise
         </h2>
         <p className="text-gray-300 text-base font-medium">
           Insights + approvals aligned. Ready to ship.

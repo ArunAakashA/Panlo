@@ -28,7 +28,7 @@ export default function SectionVideo() {
   return (
     <section
       ref={sectionRef}
-      className="origin-center bg-bg-primary text-white pt-7 md:pt-10 pb-20 px-4 lg:px-0 opacity-0 translate-y-20 will-change-transform"
+      className="origin-center bg-bg-primary text-white pt-7 md:pt-10 pb-10 md:pb-15 px-4 lg:px-0 opacity-0 translate-y-20 will-change-transform"
     >
       <div className="max-w-7xl mx-auto">
         <div className="video-br relative w-full overflow-hidden rounded-2xl p-[6px] bg-gradient-to-r from-primary via-primary to-primary shadow-[0_0_64px_-1px_#0AB5A940]">
