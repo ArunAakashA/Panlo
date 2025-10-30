@@ -153,7 +153,7 @@ export default function SectionHowItWorks_1() {
       </div>
 
       <DecorStar position="top-0 right-80" size={40} delay={0.8} glow={false} float={false} />
-      <DecorStar position="bottom-140 left-30" size={40} delay={1.4} glow={false} float={false} />
+      <DecorStar position="bottom-140 left-20" size={40} delay={1.4} glow={false} float={false} />
     </section>
   );
 }

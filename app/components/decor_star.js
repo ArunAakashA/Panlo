@@ -72,7 +72,7 @@ export default function DecorStar({
         alt="Decorative star"
         width={size}
         height={size}
-        className="opacity-90 w-full h-full"
+        className="opacity-90 w-full h-full z-[60]"
       />
     </div>
   );

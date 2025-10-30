@@ -50,7 +50,7 @@ export default function SectionVideo() {
       </div>
 
       <DecorStar
-        position="top-120 right-10"
+        position="top-120 right-20"
         size={40}
         delay={0.8}
         glow={false}
