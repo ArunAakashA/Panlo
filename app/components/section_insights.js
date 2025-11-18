@@ -174,7 +174,7 @@ export default function SectionInsights() {
               alt="Dashboard preview"
               width={1000}
               height={800}
-              className="w-full h-auto rounded-xl border object-cover"
+              className="w-full h-auto rounded-xl border object-cover shadow-[0px_0px_43.3px_24px_#0AB5A91A]"
             />
           </div>
 

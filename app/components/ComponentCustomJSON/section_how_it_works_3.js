@@ -76,7 +76,7 @@ export default function SectionHowItWorks_3() {
   return (
     <section
       ref={sectionRef}
-      className="how-it-works relative bg-bg-primary flex flex-col items-center justify-start overflow-hidden min-h-[60vh] lg:min-h-screen md:justify-center mt-[0px] sm:mt-[-30px] lg:mt-[-40px] pt-10 sm:pt-16 pb-5"
+      className="how-it-works relative bg-bg-primary flex flex-col items-center justify-start overflow-hidden min-h-[60vh] lg:min-h-screen md:justify-center mt-[0px] sm:mt-[-30px] lg:mt-[-20px] pt-10 sm:pt-16 pb-5"
     >
       <div className="absolute top-0 flex justify-center will-change-transform">
         <svg
@@ -152,7 +152,7 @@ export default function SectionHowItWorks_3() {
           Insights + approvals aligned. Ready to ship.
         </p>
 
-        <div className="w-full mt-6 rounded-2xl shadow-lg overflow-hidden">
+        <div className="w-full mt-[-20px] md:mt-[-40px] rounded-2xl shadow-lg overflow-hidden">
           <Image
             src="/images/sync&strategize.webp"
             alt="Sync & Strategize"

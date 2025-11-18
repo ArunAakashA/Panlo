@@ -78,7 +78,7 @@ export default function SectionHowItWorks_1() {
       ref={sectionRef}
       className="how-it-works relative bg-bg-primary flex flex-col items-center justify-start overflow-hidden min-h-[60vh] lg:min-h-screen md:justify-center mt-[0px] sm:mt-[-30px] lg:mt-[-40px] pt-10 sm:pt-16"
     >
-     
+
       <div className="absolute top-0 flex justify-center will-change-transform">
         <svg
           className="glowline-svg w-[200px] h-[150px] lg:h-[250px] overflow-visible"
@@ -113,7 +113,7 @@ export default function SectionHowItWorks_1() {
             filter="url(#circular-glow)"
           />
 
-          
+
           <circle
             className="glow-ball"
             r="10"
@@ -141,10 +141,10 @@ export default function SectionHowItWorks_1() {
         <h2 className="text-2xl lg:text-[40px] font-bold text-white">Create & Upload</h2>
         <p className="text-gray-300 text-base font-medium">Add assets or link a live site.</p>
 
-        <div className="w-full mt-6 rounded-2xl shadow-lg overflow-hidden">
+        <div className="w-full mt-[-20px] md:mt-[-40px] rounded-2xl shadow-lg overflow-hidden">
           <Image
             src="/images/create&upload.webp"
-            alt="Review & Collaborate"
+            alt="Create & Upload"
             width={900}
             height={500}
             className="w-full h-auto object-cover"
